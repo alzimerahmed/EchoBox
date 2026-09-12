@@ -38,7 +38,6 @@ rootProject.name = "EchoBox"
 include(
     ":androidApp",
     ":composeApp",
-    ":desktopApp",
     ":common",
     ":data",
     ":domain",
@@ -48,8 +47,6 @@ include(
     ":aiService",
     ":autoEqService",
     ":lyricsService",
-    ":media-jvm",
-    ":media-jvm-ui",
     ":media3",
     ":media3-ui",
     ":crashlytics",
@@ -78,8 +75,6 @@ project(":kizzy").projectDir = File(serviceDir, "kizzy")
 project(":listenTogether").projectDir = File(serviceDir, "listenTogether")
 
 // media modules
-project(":media-jvm").projectDir = File(mediaDir, "media-jvm")
-project(":media-jvm-ui").projectDir = File(mediaDir, "media-jvm-ui")
 project(":media3").projectDir = File(mediaDir, "media3")
 project(":media3-ui").projectDir = File(mediaDir, "media3-ui")
 

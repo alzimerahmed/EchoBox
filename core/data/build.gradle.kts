@@ -42,33 +42,10 @@ kotlin {
     // configure native binary output. For more information, see:
     // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
 
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "dataKit"
-
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = xcfName
-            isStatic = true
-            // Required when using NativeSQLiteDriver
-            linkerOpts.add("-lsqlite3")
-        }
-    }
-
-    jvm {
-    }
-
-    dependencies {
-        implementation(platform(libs.koin.bom))
-    }
-
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(projects.common)
                 implementation(projects.domain)
                 implementation(projects.aiService)
@@ -120,33 +97,11 @@ kotlin {
                 implementation(libs.room.ktx)
             }
         }
-
-        iosMain {
-            dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
-            }
-        }
-
-        jvmMain {
-            dependencies {
-                implementation(projects.mediaJvm)
-                implementation(libs.nowplaying)
-                implementation(libs.jna)
-                implementation(libs.jna.platform)
-            }
-        }
     }
 }
 
 dependencies {
     add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
-    add("kspJvm", libs.room.compiler)
 }
 
 tasks.withType<CompileArtProfileTask> {

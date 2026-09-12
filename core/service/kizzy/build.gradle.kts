@@ -15,19 +15,8 @@ kotlin {
     }
     val xcfName = "kizzyKit"
 
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    jvm()
 
     sourceSets {
         commonMain {
@@ -57,13 +46,7 @@ kotlin {
             dependencies {}
         }
 
-        iosMain {
-            dependencies {}
-        }
 
-        jvmMain {
-            dependencies {}
-        }
     }
 }
 

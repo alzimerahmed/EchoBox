@@ -1066,21 +1066,6 @@ class SharedViewModel(
                     }
                     _isCheckingUpdate.value = false
                 }
-            } else if (updateChannel == DataStoreManager.FDROID) {
-                updateRepository.checkForFdroidUpdate().collectLatest { response ->
-                    val data = response.data
-                    when (response) {
-                        is Resource.Success if (data != null) -> {
-                            _updateResponse.value = data
-                            showedUpdateDialog = true
-                        }
-
-                        else -> {
-                            log("Check for update error: ${response.message}", LogLevel.WARN)
-                        }
-                    }
-                    _isCheckingUpdate.value = false
-                }
             }
         }
     }

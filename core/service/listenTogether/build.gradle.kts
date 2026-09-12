@@ -16,20 +16,8 @@ kotlin {
 
     val xcfName = "listenTogetherKit"
 
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    jvm {
-    }
 
     sourceSets {
         commonMain {

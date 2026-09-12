@@ -2633,38 +2633,7 @@ fun SettingScreen(
                 )
                 SettingItem(
                     title = stringResource(Res.string.update_channel),
-                    subtitle =
-                        if (updateChannel == DataStoreManager.FDROID) {
-                            "F-Droid"
-                        } else {
-                            "EchoBox GitHub Release"
-                        },
-                    onClick = {
-                        viewModel.setAlertData(
-                            SettingAlertState(
-                                title = runBlocking { getString(Res.string.update_channel) },
-                                selectOne =
-                                    SettingAlertState.SelectData(
-                                        listSelect =
-                                            listOf(
-                                                (updateChannel == DataStoreManager.FDROID) to "F-Droid",
-                                                (updateChannel == DataStoreManager.GITHUB) to "EchoBox GitHub Release",
-                                            ),
-                                    ),
-                                confirm =
-                                    runBlocking { getString(Res.string.change) } to { state ->
-                                        viewModel.setUpdateChannel(
-                                            when (state.selectOne?.getSelected()) {
-                                                "F-Droid" -> DataStoreManager.FDROID
-                                                "EchoBox GitHub Release" -> DataStoreManager.GITHUB
-                                                else -> DataStoreManager.GITHUB
-                                            },
-                                        )
-                                    },
-                                dismiss = runBlocking { getString(Res.string.cancel) },
-                            ),
-                        )
-                    },
+                    subtitle = "EchoBox GitHub Release",
                 )
                 SettingItem(
                     title = stringResource(Res.string.check_for_update),
@@ -2677,7 +2646,7 @@ fun SettingScreen(
                     title = stringResource(Res.string.author),
                     subtitle = stringResource(Res.string.alzimer_dev),
                     onClick = {
-                        uriHandler.openUri("https://github.com/maxrave-dev")
+                        uriHandler.openUri("https://github.com/alzimerahmed84/EchoBox")
                     },
                 )
                 SettingItem(

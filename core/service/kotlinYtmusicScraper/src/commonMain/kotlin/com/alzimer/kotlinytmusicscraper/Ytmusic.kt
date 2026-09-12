@@ -658,10 +658,6 @@ class Ytmusic {
             contentType(ContentType.Application.Json)
         }
 
-    suspend fun checkForFdroidUpdate() =
-        httpClient.get("https://f-droid.org/api/v1/packages/com.alzimer.echobox") {
-            contentType(ContentType.Application.Json)
-        }
 
     suspend fun playlist(playlistId: String) =
         httpClient.post("browse") {

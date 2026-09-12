@@ -53,7 +53,6 @@ import com.alzimer.echobox.kotlinytmusicscraper.models.response.TidalOAuthRespon
 import com.alzimer.echobox.kotlinytmusicscraper.models.response.RemoteConfig
 import com.alzimer.echobox.kotlinytmusicscraper.models.response.toLikeStatus
 import com.alzimer.echobox.kotlinytmusicscraper.models.response.toListAccountInfo
-import com.alzimer.echobox.kotlinytmusicscraper.models.echobox.FdroidResponse
 import com.alzimer.echobox.kotlinytmusicscraper.models.echobox.GithubResponse
 import com.alzimer.echobox.kotlinytmusicscraper.models.sponsorblock.SkipSegments
 import com.alzimer.echobox.kotlinytmusicscraper.models.youtube.GhostResponse
@@ -874,10 +873,6 @@ class YouTube {
             ytMusic.checkForGithubReleaseUpdate().body<GithubResponse>()
         }
 
-    suspend fun checkForFdroidUpdate(): Result<FdroidResponse> =
-        runCatching {
-            ytMusic.checkForFdroidUpdate().body<FdroidResponse>()
-        }
 
     suspend fun newRelease(): Result<ExplorePage> =
         runCatching {

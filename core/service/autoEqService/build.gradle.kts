@@ -15,20 +15,8 @@ kotlin {
 
     val xcfName = "autoEqServiceKit"
 
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
 
-    jvm {
-    }
 
     sourceSets {
         commonMain {
