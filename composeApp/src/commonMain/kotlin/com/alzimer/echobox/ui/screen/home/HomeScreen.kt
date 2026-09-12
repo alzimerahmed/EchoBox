@@ -104,12 +104,10 @@ import com.alzimer.echobox.extension.artworkScrimBrush
 import com.alzimer.echobox.extension.isScrollingUp
 import com.alzimer.echobox.extension.rgbFactor
 import com.alzimer.echobox.getPlatform
-import com.alzimer.echobox.ui.component.BlogPromoDialog
 import com.alzimer.echobox.ui.component.CenterLoadingBox
 import com.alzimer.echobox.ui.component.Chip
 import com.alzimer.echobox.ui.component.DropdownButton
 import com.alzimer.echobox.ui.component.EndOfPage
-import com.alzimer.echobox.ui.component.FootgunsStarDialog
 import com.alzimer.echobox.ui.component.HomeItem
 import com.alzimer.echobox.ui.component.HomeItemContentPlaylist
 import com.alzimer.echobox.ui.component.HomeShimmer
@@ -141,7 +139,6 @@ import com.alzimer.echobox.ui.navigation.destination.login.LoginDestination
 import com.alzimer.echobox.ui.screen.library.LibraryDynamicPlaylistType
 import com.alzimer.echobox.ui.theme.desktopPanelDark
 import com.alzimer.echobox.ui.theme.typo
-import com.alzimer.echobox.viewModel.FOOTGUNS_STAR_KEY
 import com.alzimer.echobox.viewModel.HomeViewModel
 import com.alzimer.echobox.viewModel.HomeViewModel.Companion.HOME_PARAMS_COMMUTE
 import com.alzimer.echobox.viewModel.HomeViewModel.Companion.HOME_PARAMS_ENERGIZE
@@ -198,8 +195,6 @@ import echobox.composeapp.generated.resources.welcome_back
 import echobox.composeapp.generated.resources.what_is_best_choice_today
 import echobox.composeapp.generated.resources.workout
 
-// DataStore key for blog-promo one-shot dialog. Bump the suffix (v2, v3, …) to re-promote.
-private const val BLOG_PROMO_KEY = "blog_promo_v1_seen"
 
 private val listOfHomeChip =
     listOf(
@@ -300,12 +295,7 @@ fun HomeScreen(
     var showRequestShareLyricsPermissions by rememberSaveable {
         mutableStateOf(false)
     }
-    var showBlogPromoDialog by rememberSaveable {
-        mutableStateOf(false)
-    }
-    var showFootgunsDialog by rememberSaveable {
-        mutableStateOf(false)
-    }
+
 
     var topAppBarHeightPx by rememberSaveable {
         mutableIntStateOf(0)
@@ -362,21 +352,8 @@ fun HomeScreen(
             showReviewDialog = true
         } else if ((openAppTime == 1 || openAppTime % 15 == 0) && openAppTime <= 60 && !shareLyricsPermissions) {
             showRequestShareLyricsPermissions = true
-        } else if (openAppTime == 5) {
-            // Blog promo: one-shot after 5 app opens, bump key suffix to re-promote later
-            if (sharedViewModel.getString(BLOG_PROMO_KEY) != "true") {
-                showBlogPromoDialog = true
-            }
-        } else if (openAppTime % 10 == 6 &&
-            openAppTime <= 46 &&
-            sharedViewModel.getString(FOOTGUNS_STAR_KEY) != "true"
-        ) {
-            // kotlin-footguns star prompt: 6, 16, 26, 36, 46 - one open after each review milestone,
-            // and clear of the share-lyrics (15, 45) and blog-promo (5) milestones
-            showFootgunsDialog = true
         } else {
             showReviewDialog = false
-            showFootgunsDialog = false
             showRequestShareLyricsPermissions = false
         }
     }
@@ -426,33 +403,6 @@ fun HomeScreen(
                     isDismissOnly = false,
                 )
                 showReviewDialog = false
-            },
-        )
-    }
-
-    if (showFootgunsDialog) {
-        FootgunsStarDialog(
-            onDismissRequest = {
-                // "Later" only closes the dialog: it must not touch OPEN_APP_TIME,
-                // so the next milestone stays exactly where it was.
-                showFootgunsDialog = false
-            },
-            onDoneStar = {
-                sharedViewModel.putString(FOOTGUNS_STAR_KEY, "true")
-                showFootgunsDialog = false
-            },
-        )
-    }
-
-    if (showBlogPromoDialog) {
-        BlogPromoDialog(
-            onDismissRequest = {
-                sharedViewModel.putString(BLOG_PROMO_KEY, "true")
-                showBlogPromoDialog = false
-            },
-            onVisitBlog = {
-                sharedViewModel.putString(BLOG_PROMO_KEY, "true")
-                showBlogPromoDialog = false
             },
         )
     }
