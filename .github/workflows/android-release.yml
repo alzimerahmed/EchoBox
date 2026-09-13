@@ -129,7 +129,8 @@ jobs:
         run: |
           tag="${GITHUB_REF_NAME}"
           gh release create "$tag" \
+            -R "${{ github.repository }}" \
             --title "EchoBox $tag" \
             --generate-notes \
             dist/*.apk \
-          || gh release upload "$tag" --clobber dist/*.apk
+          || gh release upload "$tag" -R "${{ github.repository }}" --clobber dist/*.apk
