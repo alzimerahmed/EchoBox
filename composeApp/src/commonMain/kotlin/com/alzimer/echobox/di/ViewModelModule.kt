@@ -24,7 +24,7 @@ import com.alzimer.echobox.viewModel.AutoEqViewModel
 import com.alzimer.echobox.viewModel.SettingsViewModel
 import com.alzimer.echobox.viewModel.SharedViewModel
 import com.alzimer.echobox.viewModel.SongSelectionViewModel
-import com.alzimer.echobox.viewModel.WrappedViewModel
+import com.alzimer.echobox.feature.wrapped.WrappedViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

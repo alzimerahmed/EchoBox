@@ -1,4 +1,4 @@
-package com.alzimer.echobox.viewModel
+package com.alzimer.echobox.feature.wrapped
 
 import androidx.lifecycle.viewModelScope
 import com.alzimer.echobox.domain.data.entities.ArtistEntity
@@ -10,7 +10,7 @@ import com.alzimer.echobox.domain.repository.AnalyticsRepository
 import com.alzimer.echobox.domain.repository.ArtistRepository
 import com.alzimer.echobox.domain.repository.SongRepository
 import com.alzimer.echobox.domain.utils.Resource
-import com.alzimer.echobox.viewModel.base.BaseViewModel
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
@@ -34,7 +34,7 @@ class WrappedViewModel(
     private val songRepository: SongRepository,
     private val artistRepository: ArtistRepository,
     private val albumRepository: AlbumRepository,
-) : BaseViewModel() {
+) : ViewModel() {
     /**
      * Composed on the first collector, then held.
      *

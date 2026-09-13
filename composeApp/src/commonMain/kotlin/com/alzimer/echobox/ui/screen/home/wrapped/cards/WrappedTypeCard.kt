@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import com.alzimer.echobox.domain.data.model.analytics.ListeningFingerprint
-import com.alzimer.echobox.ui.screen.home.wrapped.WrappedTokens
-import com.alzimer.echobox.ui.screen.home.wrapped.formatCount
-import com.alzimer.echobox.ui.screen.home.wrapped.formatPercent
-import com.alzimer.echobox.viewModel.WrappedArchetype
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedTokens
+import com.alzimer.echobox.feature.wrapped.formatCount
+import com.alzimer.echobox.feature.wrapped.formatPercent
+import com.alzimer.echobox.feature.wrapped.WrappedArchetype
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res

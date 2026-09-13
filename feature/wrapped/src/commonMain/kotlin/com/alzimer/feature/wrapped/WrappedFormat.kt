@@ -1,8 +1,8 @@
-package com.alzimer.echobox.ui.screen.home.wrapped
+package com.alzimer.echobox.feature.wrapped
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.intl.Locale
-import com.alzimer.echobox.viewModel.WrappedListeningBand
+import com.alzimer.echobox.feature.wrapped.WrappedListeningBand
 import kotlin.math.roundToInt
 
 /**

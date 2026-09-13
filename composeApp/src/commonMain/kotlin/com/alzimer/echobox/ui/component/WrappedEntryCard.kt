@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.alzimer.echobox.ui.icon.PlayArrow
 import com.alzimer.echobox.ui.icon.SimpIcons
-import com.alzimer.echobox.ui.screen.home.wrapped.formatCount
-import com.alzimer.echobox.ui.screen.home.wrapped.wholeMinutes
+import com.alzimer.echobox.feature.wrapped.formatCount
+import com.alzimer.echobox.feature.wrapped.wholeMinutes
 import com.alzimer.echobox.ui.theme.typo
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.wrapped_entry_subtitle

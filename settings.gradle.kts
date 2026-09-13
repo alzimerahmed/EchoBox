@@ -57,6 +57,7 @@ include(
     ":lastfm-empty",
     ":kizzy",
     ":listenTogether",
+    ":feature-wrapped",
 )
 
 // core modules
@@ -77,5 +78,8 @@ project(":listenTogether").projectDir = File(serviceDir, "listenTogether")
 // media modules
 project(":media3").projectDir = File(mediaDir, "media3")
 project(":media3-ui").projectDir = File(mediaDir, "media3-ui")
+
+// feature modules
+project(":feature-wrapped").projectDir = File(rootDir, "feature/wrapped")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

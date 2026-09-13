@@ -1,4 +1,4 @@
-package com.alzimer.echobox.viewModel
+package com.alzimer.echobox.feature.wrapped
 
 import com.alzimer.echobox.domain.data.entities.AlbumEntity
 import com.alzimer.echobox.domain.data.entities.ArtistEntity

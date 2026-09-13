@@ -39,11 +39,11 @@ import androidx.compose.ui.unit.sp
 import com.alzimer.echobox.ui.icon.Download
 import com.alzimer.echobox.ui.icon.Share
 import com.alzimer.echobox.ui.icon.SimpIcons
-import com.alzimer.echobox.ui.screen.home.wrapped.WrappedTokens
-import com.alzimer.echobox.ui.screen.home.wrapped.formatCount
-import com.alzimer.echobox.ui.screen.home.wrapped.wholeMinutes
-import com.alzimer.echobox.viewModel.WrappedArchetype
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedTokens
+import com.alzimer.echobox.feature.wrapped.formatCount
+import com.alzimer.echobox.feature.wrapped.wholeMinutes
+import com.alzimer.echobox.feature.wrapped.WrappedArchetype
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

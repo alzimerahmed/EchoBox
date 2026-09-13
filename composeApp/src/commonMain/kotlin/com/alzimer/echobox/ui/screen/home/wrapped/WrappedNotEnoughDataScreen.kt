@@ -27,10 +27,11 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.alzimer.echobox.feature.wrapped.formatCount
 import com.alzimer.echobox.ui.component.RippleIconButton
 import com.alzimer.echobox.ui.icon.ArrowBackIosNew
 import com.alzimer.echobox.ui.icon.SimpIcons
-import com.alzimer.echobox.viewModel.WrappedUiState
+import com.alzimer.echobox.feature.wrapped.WrappedUiState
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.wrapped

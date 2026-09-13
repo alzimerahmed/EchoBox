@@ -42,6 +42,7 @@ kotlin {
         namespace = "com.alzimer.echobox.composeapp"
         compileSdk = 37
         minSdk = 26
+        withDeviceTest { }
         withJava()
         androidResources {
             enable = true
@@ -114,6 +115,7 @@ kotlin {
             api(projects.common)
             api(projects.domain)
             implementation(projects.data)
+            implementation(projects.featureWrapped)
 
             // Last.fm (gated: real scrobbler for full builds, no-op stub for FOSS builds).
             // `api` rather than `implementation` so :androidApp can hand it the credentials from
@@ -171,6 +173,15 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        val androidDeviceTest by getting {
+            dependencies {
+                implementation(libs.androidx.junit)
+                implementation(libs.espresso.core)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.uiTest)
+            }
         }
     }
 }

@@ -61,6 +61,7 @@ import com.alzimer.echobox.expect.ui.rememberBackdrop
 import com.alzimer.echobox.expect.ui.rememberSaveImagePermission
 import com.alzimer.echobox.expect.ui.toPngByteArray
 import com.alzimer.echobox.getPlatform
+import com.alzimer.echobox.feature.wrapped.WrappedTokens
 import com.alzimer.echobox.ui.component.CenterLoadingBox
 import com.alzimer.echobox.ui.component.LiquidGlassIconButton
 import com.alzimer.echobox.ui.component.capture.CaptureController
@@ -82,10 +83,10 @@ import com.alzimer.echobox.ui.screen.home.wrapped.cards.WrappedTopArtistsCard
 import com.alzimer.echobox.ui.screen.home.wrapped.cards.WrappedTopTracksCard
 import com.alzimer.echobox.ui.screen.home.wrapped.cards.WrappedTypeCard
 import com.alzimer.echobox.ui.theme.seed
-import com.alzimer.echobox.viewModel.WrappedCard
-import com.alzimer.echobox.viewModel.WrappedUiState
-import com.alzimer.echobox.viewModel.WrappedViewModel
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedCard
+import com.alzimer.echobox.feature.wrapped.WrappedUiState
+import com.alzimer.echobox.feature.wrapped.WrappedViewModel
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.http.Url

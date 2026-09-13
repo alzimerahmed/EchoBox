@@ -14,8 +14,8 @@ import com.alzimer.echobox.domain.utils.LocalResource
 import com.alzimer.echobox.ui.component.GridLibraryPlaylist
 import com.alzimer.echobox.ui.component.WrappedEntryCard
 import com.alzimer.echobox.ui.navigation.destination.home.WrappedDestination
-import com.alzimer.echobox.viewModel.WrappedUiState
-import com.alzimer.echobox.viewModel.WrappedViewModel
+import com.alzimer.echobox.feature.wrapped.WrappedUiState
+import com.alzimer.echobox.feature.wrapped.WrappedViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.wrapped_recap_empty

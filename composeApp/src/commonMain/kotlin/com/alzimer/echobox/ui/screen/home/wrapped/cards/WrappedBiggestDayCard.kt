@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.alzimer.echobox.domain.data.entities.SongEntity
 import com.alzimer.echobox.ui.screen.home.analytics.monthShortName
-import com.alzimer.echobox.ui.screen.home.wrapped.WrappedTokens
-import com.alzimer.echobox.ui.screen.home.wrapped.formatCount
-import com.alzimer.echobox.viewModel.WrappedBiggestDay
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedTokens
+import com.alzimer.echobox.feature.wrapped.formatCount
+import com.alzimer.echobox.feature.wrapped.WrappedBiggestDay
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.wrapped_biggest_day_caption

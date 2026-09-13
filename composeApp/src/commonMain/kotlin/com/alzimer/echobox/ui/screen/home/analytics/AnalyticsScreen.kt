@@ -114,8 +114,8 @@ import com.alzimer.echobox.viewModel.AnalyticsUiState
 import com.alzimer.echobox.viewModel.AnalyticsViewModel
 import com.alzimer.echobox.viewModel.SharedViewModel
 import com.alzimer.echobox.viewModel.SongSelectionViewModel
-import com.alzimer.echobox.viewModel.WrappedUiState
-import com.alzimer.echobox.viewModel.WrappedViewModel
+import com.alzimer.echobox.feature.wrapped.WrappedUiState
+import com.alzimer.echobox.feature.wrapped.WrappedViewModel
 import kotlinx.coroutines.flow.map
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject

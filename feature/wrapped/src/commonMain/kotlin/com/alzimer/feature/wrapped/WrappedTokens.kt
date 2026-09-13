@@ -1,4 +1,4 @@
-package com.alzimer.echobox.ui.screen.home.wrapped
+package com.alzimer.echobox.feature.wrapped
 
 import androidx.compose.ui.unit.dp
 

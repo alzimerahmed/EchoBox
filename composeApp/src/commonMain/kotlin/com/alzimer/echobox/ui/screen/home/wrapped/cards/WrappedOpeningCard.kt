@@ -26,9 +26,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import com.alzimer.echobox.ui.screen.home.wrapped.WrappedTokens
-import com.alzimer.echobox.ui.screen.home.wrapped.formatCount
-import com.alzimer.echobox.viewModel.WrappedYear
+import com.alzimer.echobox.feature.wrapped.WrappedTokens
+import com.alzimer.echobox.feature.wrapped.formatCount
+import com.alzimer.echobox.feature.wrapped.WrappedYear
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.wrapped_opening_days
