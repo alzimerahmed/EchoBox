@@ -316,7 +316,6 @@
 -keep class com.alzimer.echobox.lyrics.models.** { *; }
 -keep class org.simpmusic.nowplayingcenter.** { *; }
 -keep class io.github.selemba1000.** { *; }
--keep class com.echobox.lyrics.parser.** { *; }
 
 # dbus-java (used by JMTC/NPYC for Linux MPRIS)
 -keep class org.freedesktop.dbus.** { *; }

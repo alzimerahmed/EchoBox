@@ -7,7 +7,7 @@ set -e
 BUILD_TYPE="release"
 BUILD_VARIANT="full"
 KEYSTORE_PATH="./echobox.jks"
-# Read passwords from environment variables or use default (for backward compatibility)
+# Read passwords from environment variables (required — script exits when unset)
 KEYSTORE_PASSWORD="${KEYSTORE_PASSWORD}"
 KEY_ALIAS="${KEY_ALIAS}"
 KEY_PASSWORD="${KEY_PASSWORD}"
@@ -118,8 +118,8 @@ for APK_PATH in $APK_PATHS; do
     --alignment-preserved \
     --ks "$KEYSTORE_PATH" \
     --ks-key-alias "$KEY_ALIAS" \
-    --ks-pass pass:"$KEYSTORE_PASSWORD" \
-    --key-pass pass:"$KEY_PASSWORD" \
+    --ks-pass env:KEYSTORE_PASSWORD \
+    --key-pass env:KEY_PASSWORD \
     --out "$SIGNED_APK_PATH" \
     "$ALIGNED_APK_PATH"
   echo "APK signed successfully: $SIGNED_APK_PATH"

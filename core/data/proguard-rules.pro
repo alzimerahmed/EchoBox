@@ -134,7 +134,6 @@
 
 -keep class com.alzimer.echobox.lyrics.parser.** { *; }
 -keep class com.alzimer.echobox.lyrics.models.** { *; }
--keep class com.echobox.lyrics.parser.** { *; }
 
 -dontwarn com.alzimer.echobox.kotlinytmusicscraper.YouTube$SearchFilter$Companion
 -dontwarn com.alzimer.echobox.kotlinytmusicscraper.YouTube$SearchFilter
