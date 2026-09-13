@@ -13,6 +13,8 @@ Before starting any non-trivial task:
 4. At task end: `code-reviewer` sub-agent on the final diff (non-negotiable)
 5. Append learnings via `/ce-compound` if a durable lesson was learned
 
+For phase implementations (any task completing a row in docs/plan.md), /ce-work is mandatory.
+
 Skip this for single-line edits, pure Q&A, or reading files.
 
 ## Communication Style
