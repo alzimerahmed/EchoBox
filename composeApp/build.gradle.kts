@@ -181,6 +181,8 @@ kotlin {
                 implementation(libs.espresso.core)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.uiTest)
+                // compose.uiTest resolves to ui-test only — createComposeRule lives here.
+                implementation(libs.compose.ui.test.junit4)
             }
         }
     }

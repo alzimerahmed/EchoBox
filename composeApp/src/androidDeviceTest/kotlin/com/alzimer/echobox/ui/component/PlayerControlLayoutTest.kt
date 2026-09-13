@@ -98,7 +98,12 @@ class PlayerControlLayoutTest {
             }
         }
         val rowMidY = with(composeRule.density) { 48.dp.toPx() }
-        composeRule.onRoot().performTouchInput { click(Offset(width * 0.12f, rowMidY)) }
+        // Shuffle is the first of five weight(1f) slots inside a 20.dp horizontal padding —
+        // tap that slot's centre: padding + slotWidth/2.
+        val pad = with(composeRule.density) { 20.dp.toPx() }
+        composeRule.onRoot().performTouchInput {
+            click(Offset(pad + (width - 2 * pad) / 10f, rowMidY))
+        }
         composeRule.waitForIdle()
         assertTrue(UIEvent.Shuffle in events)
     }
