@@ -3,6 +3,7 @@ package com.alzimer.echobox.domain.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
@@ -23,10 +24,13 @@ import kotlinx.datetime.LocalDateTime
             onDelete = ForeignKey.CASCADE,
         ),
     ],
+    // (playlistId, position) covers the track read — WHERE playlistId = ? ORDER BY position —
+    // filter and sort in one walk; the leftmost column still serves plain playlistId lookups.
+    indices = [Index("playlistId", "position")],
 )
 data class PairSongLocalPlaylist(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(index = true) val playlistId: Long,
+    val playlistId: Long,
     @ColumnInfo(index = true) val songId: String,
     val position: Int = 0,
     val inPlaylist: LocalDateTime = now(),

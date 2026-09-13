@@ -1,5 +1,6 @@
 package com.alzimer.echobox.data.repository
 
+import com.alzimer.echobox.data.cache.TtlCache
 import com.alzimer.echobox.data.db.datasource.LocalDataSource
 import com.alzimer.echobox.data.extension.getFullDataFromDB
 import com.alzimer.echobox.data.parser.parsePodcastContinueData
@@ -20,12 +21,22 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
+private const val PODCAST_BROWSE_TTL_MILLIS = 30L * 60 * 1000
+
 internal class PodcastRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val youTube: YouTube,
 ) : PodcastRepository {
+    // getPodcastData pages through every episode continuation, so a reopen used to cost a
+    // whole chain of calls. Episodes change slowly; a 30-minute hit serves the reopen.
+    private val podcastBrowseCache = TtlCache<String, PodcastBrowse>(PODCAST_BROWSE_TTL_MILLIS)
+
     override fun getPodcastData(podcastId: String): Flow<Resource<PodcastBrowse>> =
         flow {
+            podcastBrowseCache.get(podcastId)?.let { cached ->
+                emit(Resource.Success<PodcastBrowse>(cached))
+                return@flow
+            }
             runCatching {
                 youTube
                     .customQuery(browseId = podcastId)
@@ -163,17 +174,18 @@ internal class PodcastRepositoryImpl(
                                 }
                         }
                         if (author != null) {
+                            val browse =
+                                PodcastBrowse(
+                                    title = title ?: "",
+                                    author = author,
+                                    authorThumbnail = authorThumbnail,
+                                    thumbnail = thumbnail ?: emptyList<Thumbnail>(),
+                                    description = description,
+                                    listEpisode = listEpisode,
+                                )
+                            podcastBrowseCache.put(podcastId, browse)
                             emit(
-                                Resource.Success<PodcastBrowse>(
-                                    PodcastBrowse(
-                                        title = title ?: "",
-                                        author = author,
-                                        authorThumbnail = authorThumbnail,
-                                        thumbnail = thumbnail ?: emptyList<Thumbnail>(),
-                                        description = description,
-                                        listEpisode = listEpisode,
-                                    ),
-                                ),
+                                Resource.Success<PodcastBrowse>(browse),
                             )
                         } else {
                             emit(Resource.Error<PodcastBrowse>("Error"))

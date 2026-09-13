@@ -1,13 +1,21 @@
 package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.data.type.ArtistType
 import com.alzimer.echobox.domain.data.type.RecentlyType
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "artist")
+@Entity(
+    tableName = "artist",
+    indices = [
+        Index("inLibrary"),
+        // Followed-artists screen + the unfollow cleanup subqueries both filter on followed
+        Index("followed", "followedAt"),
+    ],
+)
 data class ArtistEntity(
     @PrimaryKey(autoGenerate = false)
     val channelId: String,

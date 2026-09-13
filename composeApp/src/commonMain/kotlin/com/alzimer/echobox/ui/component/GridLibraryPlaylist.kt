@@ -45,12 +45,12 @@ import com.alzimer.echobox.domain.data.entities.AlbumEntity
 import com.alzimer.echobox.domain.data.entities.LocalPlaylistEntity
 import com.alzimer.echobox.domain.data.entities.PlaylistEntity
 import com.alzimer.echobox.domain.data.entities.PodcastsEntity
+import com.alzimer.echobox.domain.data.model.searchResult.albums.AlbumsResult
 import com.alzimer.echobox.domain.data.model.searchResult.playlists.PlaylistsResult
 import com.alzimer.echobox.domain.data.type.ChartItem
 import com.alzimer.echobox.domain.data.type.MonthlyRecapItem
 import com.alzimer.echobox.domain.data.type.PlaylistType
 import com.alzimer.echobox.domain.utils.LocalResource
-import com.alzimer.echobox.logger.Logger
 import com.alzimer.echobox.extension.angledGradientBackground
 import com.alzimer.echobox.extension.isScrollingUp
 import com.alzimer.echobox.ui.icon.Add
@@ -70,7 +70,7 @@ import echobox.composeapp.generated.resources.create
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal inline fun <reified T> GridLibraryPlaylist(
+internal fun <T> GridLibraryPlaylist(
     navController: NavController,
     contentPadding: PaddingValues,
     data: LocalResource<List<T>>,
@@ -79,16 +79,15 @@ internal inline fun <reified T> GridLibraryPlaylist(
     // top-bar frost from `index == 0 && offset == 0`, which the coarse onScrolling below
     // cannot say.
     state: LazyGridState = rememberLazyGridState(),
-    noinline onScrolling: (onTop: Boolean) -> Unit = { _ -> },
+    onScrolling: (onTop: Boolean) -> Unit = { _ -> },
     // A full-width block above the tiles, as a real grid item spanning every column — the same
     // mechanism the create tile and the chart button below already use. A caller drawing it in a
     // Box over the grid instead has to reserve its height in contentPadding and translate it by
     // the scroll offset by hand, which is what left a screen-tall hole above the Wrapped tab.
-    noinline header: (@Composable () -> Unit)? = null,
-    noinline createNewPlaylist: (() -> Unit)? = null,
-    noinline onReload: () -> Unit,
+    header: (@Composable () -> Unit)? = null,
+    createNewPlaylist: (() -> Unit)? = null,
+    onReload: () -> Unit,
 ) {
-    Logger.w("GridLibraryPlaylist", "Generic Type: ${T::class.simpleName}")
     val isScrollingUp by state.isScrollingUp()
 
     LaunchedEffect(state) {
@@ -196,7 +195,25 @@ internal inline fun <reified T> GridLibraryPlaylist(
                             }
                         }
                     }
-                    items(list) { item ->
+                    // Keys keep item state attached to the playlist rather than its slot when the
+                    // list reorders or refreshes; the prefix namespaces id columns that can
+                    // collide across types (a playlist id vs an album browseId are both strings).
+                    items(
+                        list,
+                        key = { item ->
+                            when (item) {
+                                is LocalPlaylistEntity -> "local_${item.id}"
+                                is AlbumEntity -> "album_${item.browseId}"
+                                is PlaylistEntity -> "yt_${item.id}"
+                                is PodcastsEntity -> "podcast_${item.podcastId}"
+                                is PlaylistsResult -> "result_${item.browseId}"
+                                is AlbumsResult -> "albumsResult_${item.browseId}"
+                                is ChartItem -> "chart_${item.ytPlaylistId}"
+                                is MonthlyRecapItem -> "recap_${item.year}_${item.month}"
+                                else -> item.hashCode()
+                            }
+                        },
+                    ) { item ->
                         if (item !is PlaylistType) {
                             return@items
                         }

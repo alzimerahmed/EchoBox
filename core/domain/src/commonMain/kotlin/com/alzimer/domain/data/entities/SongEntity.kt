@@ -1,13 +1,28 @@
 package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.data.entities.DownloadState.STATE_NOT_DOWNLOADED
 import com.alzimer.echobox.domain.data.type.RecentlyType
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "song")
+@Entity(
+    tableName = "song",
+    indices = [
+        // Library list: ORDER BY inLibrary DESC
+        Index("inLibrary"),
+        // Favorites screen: WHERE liked = 1 ORDER BY favoriteAt DESC
+        Index("liked", "favoriteAt"),
+        // Downloaded screen: WHERE downloadState = … ORDER BY downloadedAt
+        Index("downloadState", "downloadedAt"),
+        // Most-played + canvas picks: WHERE totalPlayTime > … ORDER BY totalPlayTime DESC
+        Index("totalPlayTime"),
+        // Correlated cleanup subqueries match songs to their album via song.albumId
+        Index("albumId"),
+    ],
+)
 data class SongEntity(
     @PrimaryKey(autoGenerate = false) val videoId: String = "",
     val albumId: String? = null,

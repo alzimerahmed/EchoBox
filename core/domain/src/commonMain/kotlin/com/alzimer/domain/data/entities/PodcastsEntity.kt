@@ -11,7 +11,14 @@ import com.alzimer.echobox.domain.data.type.RecentlyType
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "podcast_table")
+@Entity(
+    tableName = "podcast_table",
+    indices = [
+        Index("inLibrary"),
+        // Favorite-podcasts screen: WHERE isFavorite = 1 ORDER BY favoriteTime DESC
+        Index("isFavorite", "favoriteTime"),
+    ],
+)
 data class PodcastsEntity(
     @PrimaryKey
     val podcastId: String, // Generating a unique identifier for podcast

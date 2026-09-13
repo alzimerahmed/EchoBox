@@ -2,13 +2,24 @@ package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.data.type.HomeContentType
 import com.alzimer.echobox.domain.data.type.PlaylistType
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "local_playlist")
+@Entity(
+    tableName = "local_playlist",
+    indices = [
+        Index("inLibrary"),
+        // Downloaded playlists: WHERE downloadState = … ORDER BY downloadedAt — same pair
+        // song/album/playlist index.
+        Index("downloadState", "downloadedAt"),
+        // Sync lookups (WHERE youtubePlaylistId = ?) and the orphan-check NOT IN subquery
+        Index("youtubePlaylistId"),
+    ],
+)
 @Suppress("ktlint:standard:property-naming")
 data class LocalPlaylistEntity(
     @PrimaryKey(autoGenerate = true)

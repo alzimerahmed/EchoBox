@@ -1,13 +1,21 @@
 package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.data.type.PlaylistType
 import com.alzimer.echobox.domain.data.type.RecentlyType
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "album")
+@Entity(
+    tableName = "album",
+    indices = [
+        Index("inLibrary"),
+        Index("liked", "favoriteAt"),
+        Index("downloadState", "downloadedAt"),
+    ],
+)
 data class AlbumEntity(
     @PrimaryKey(autoGenerate = false) val browseId: String = "",
     val artistId: List<String?>? = null,

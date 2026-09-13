@@ -1,5 +1,6 @@
 package com.alzimer.echobox.data.repository
 
+import com.alzimer.echobox.data.cache.TtlCache
 import com.alzimer.echobox.data.db.datasource.LocalDataSource
 import com.alzimer.echobox.data.extension.getFullDataFromDB
 import com.alzimer.echobox.data.mapping.toAlbumsResult
@@ -22,11 +23,15 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 
 private const val TAG = "AlbumRepositoryImpl"
+private const val ALBUM_BROWSE_TTL_MILLIS = 60L * 60 * 1000
 
 internal class AlbumRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val youTube: YouTube,
 ) : AlbumRepository {
+    // An album page's track list does not change — a fresh hit skips the network round-trip.
+    private val albumBrowseCache = TtlCache<String, AlbumBrowse>(ALBUM_BROWSE_TTL_MILLIS)
+
     override fun getAllAlbums(limit: Int): Flow<List<AlbumEntity>> =
         flow {
             emit(localDataSource.getAllAlbums(limit))
@@ -104,11 +109,17 @@ internal class AlbumRepositoryImpl(
 
     override fun getAlbumData(browseId: String): Flow<Resource<AlbumBrowse>> =
         flow {
+            albumBrowseCache.get(browseId)?.let { cached ->
+                emit(Resource.Success(cached))
+                return@flow
+            }
             try {
                 youTube
                     .album(browseId, withSongs = true)
                     .onSuccess { result ->
-                        emit(Resource.Success(parseAlbumData(result)))
+                        val parsed = parseAlbumData(result)
+                        albumBrowseCache.put(browseId, parsed)
+                        emit(Resource.Success(parsed))
                     }.onFailure { e ->
                         Logger.d(TAG, "getAlbumData -> error: ${e.message ?: "unknown error"}")
                         emit(Resource.Error(e.message ?: "Unknown error while loading album"))

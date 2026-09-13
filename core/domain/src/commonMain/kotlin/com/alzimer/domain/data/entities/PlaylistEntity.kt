@@ -1,6 +1,7 @@
 package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.data.type.PlaylistType
 import com.alzimer.echobox.domain.data.type.RecentlyType
@@ -8,7 +9,14 @@ import com.alzimer.echobox.domain.extension.now
 import com.alzimer.echobox.domain.utils.isRadioPlaylistId
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "playlist")
+@Entity(
+    tableName = "playlist",
+    indices = [
+        Index("inLibrary"),
+        Index("liked", "favoriteAt"),
+        Index("downloadState", "downloadedAt"),
+    ],
+)
 data class PlaylistEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String = "",

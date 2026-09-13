@@ -100,6 +100,7 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
@@ -315,7 +316,6 @@ fun LocalPlaylistScreen(
         snapshotFlow {
             trackPagingItems.loadState
         }.collectLatest {
-            Logger.d("PlaylistScreen", "loadState: ${trackPagingItems.loadState}")
             viewModel.setLazyTrackPagingItems(trackPagingItems)
         }
     }
@@ -1340,10 +1340,9 @@ fun LocalPlaylistScreen(
                 }
             }
         }
-        items(count = trackPagingItems.itemCount, key = { index ->
-            val item = trackPagingItems[index]
-            (item?.first?.videoId ?: "") + "item_$index" + item?.second?.inPlaylist + item?.second?.position
-        }) { index ->
+        // Keyed by the join row's own PK, not position: position/index keys bind item state to
+        // the slot, so a reorder would drop it — and Phase 5 queue gestures reorder this list.
+        items(count = trackPagingItems.itemCount, key = trackPagingItems.itemKey { it.second.id }) { index ->
             val item = trackPagingItems[index]?.first
             if (item != null) {
                 val content = @Composable { mod: Modifier ->

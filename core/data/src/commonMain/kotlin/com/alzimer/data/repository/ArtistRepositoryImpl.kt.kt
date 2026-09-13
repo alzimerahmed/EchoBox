@@ -1,5 +1,6 @@
 package com.alzimer.echobox.data.repository
 
+import com.alzimer.echobox.data.cache.TtlCache
 import com.alzimer.echobox.data.db.datasource.LocalDataSource
 import com.alzimer.echobox.data.extension.getFullDataFromDB
 import com.alzimer.echobox.data.parser.parseArtistData
@@ -19,11 +20,16 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 
+private const val ARTIST_BROWSE_TTL_MILLIS = 60L * 60 * 1000
+
 internal class ArtistRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val youTube: YouTube,
     private val dataStoreManager: DataStoreManager,
 ) : ArtistRepository {
+    // An artist page is static within a session — a fresh hit skips the network round-trip.
+    private val artistBrowseCache = TtlCache<String, ArtistBrowse>(ARTIST_BROWSE_TTL_MILLIS)
+
     override fun getAllArtists(limit: Int): Flow<List<ArtistEntity>> =
         flow {
             emit(localDataSource.getAllArtists(limit))
@@ -140,11 +146,17 @@ internal class ArtistRepositoryImpl(
 
     override fun getArtistData(channelId: String): Flow<Resource<ArtistBrowse>> =
         flow {
+            artistBrowseCache.get(channelId)?.let { cached ->
+                emit(Resource.Success<ArtistBrowse>(cached))
+                return@flow
+            }
             runCatching {
                 youTube
                     .artist(channelId)
                     .onSuccess { result ->
-                        emit(Resource.Success<ArtistBrowse>(parseArtistData(result)))
+                        val parsed = parseArtistData(result)
+                        artistBrowseCache.put(channelId, parsed)
+                        emit(Resource.Success<ArtistBrowse>(parsed))
                     }.onFailure { e ->
                         Logger.d("Artist", "Error: ${e.message}")
                         emit(Resource.Error<ArtistBrowse>(e.message.toString()))

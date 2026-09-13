@@ -41,7 +41,7 @@ import com.alzimer.echobox.domain.data.entities.analytics.PlaybackEventEntity
         YourYouTubePlaylistList::class, PlaybackEventEntity::class, EventArtistEntity::class,
         AutoEqEntryEntity::class, AutoEqIndexMetaEntity::class, AutoEqCurveEntity::class
     ],
-    version = 25,
+    version = 26,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 2, to = 3), AutoMigration(
@@ -87,6 +87,14 @@ import com.alzimer.echobox.domain.data.entities.analytics.PlaybackEventEntity
         AutoMigration(24, 25),
         AutoMigration(23, 25),
         AutoMigration(22, 25),
+        // 26 adds indices for the library-screen query patterns (sort/filter columns on
+        // song/album/playlist/artist/local_playlist/podcast plus pair position, playback
+        // event timestamp and notification channelId). Index-only changes — the schema
+        // diff produces CREATE INDEX statements; no row is read or rewritten.
+        AutoMigration(25, 26),
+        AutoMigration(24, 26),
+        AutoMigration(23, 26),
+        AutoMigration(22, 26),
     ],
 )
 @TypeConverters(Converters::class)

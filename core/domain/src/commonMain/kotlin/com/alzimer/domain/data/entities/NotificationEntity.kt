@@ -2,11 +2,16 @@ package com.alzimer.echobox.domain.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity(tableName = "notification")
+@Entity(
+    tableName = "notification",
+    // Deletes by channelId run on every unfollow and in the unfollowed-artist cleanup.
+    indices = [Index("channelId")],
+)
 data class NotificationEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val channelId: String,

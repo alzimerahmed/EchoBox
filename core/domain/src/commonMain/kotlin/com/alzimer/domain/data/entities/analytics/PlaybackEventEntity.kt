@@ -1,11 +1,13 @@
 package com.alzimer.echobox.domain.data.entities.analytics
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.alzimer.echobox.domain.extension.now
 import kotlinx.datetime.LocalDateTime
 
-@Entity("playback_event")
+// This table grows unbounded — every analytics read filters or sorts on timestamp.
+@Entity(tableName = "playback_event", indices = [Index("timestamp")])
 data class PlaybackEventEntity(
     @PrimaryKey(autoGenerate = true) val eventId: Long = 0,
     val timestamp: LocalDateTime = now(),
