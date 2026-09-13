@@ -46,7 +46,7 @@ private const val TAG = "KuromojiDictionary"
 internal object KuromojiDictionary {
     /** The one place the pack's identity lives: URL, digest and expected size, together. */
     private const val DOWNLOAD_URL =
-        "https://github.com/maxrave-dev/simpmusic-files/releases/download/abc/kuromoji-ipadic-0.9.0-dict.tar.gz"
+        "https://github.com/alzimerahmed/EchoBox/releases/download/assets-v1/kuromoji-ipadic-0.9.0-dict.tar.gz"
     private const val ARCHIVE_SHA_256 = "ea18a64ff57e574bd20b3e21c20d16591308796b608c01fc39c5ef9ef8b2c761"
     private const val ARCHIVE_SIZE_BYTES = 13_329_435L
 

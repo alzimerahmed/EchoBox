@@ -20,7 +20,8 @@ crowdin.yml
 # Kotlin 2.0
 .kotlin/
 .idea
-/echobox.jks
+*.jks
+keystore.properties
 /ffmpeg-kit/build/
 
 #dev files

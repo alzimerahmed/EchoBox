@@ -3,15 +3,8 @@ name: Build APK for Release (Full & FOSS) && Desktop app release
 on:
   workflow_dispatch:
   push:
-    branches:
-      - 'main'
-    paths-ignore:
-      - 'README.md'
-      - 'fastlane/**'
-      - 'assets/**'
-      - '.github/**/*.md'
-      - '.github/FUNDING.yml'
-      - '.github/ISSUE_TEMPLATE/**'
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -81,8 +74,6 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v6
-        with:
-          
 
       - name: set up JDK 21
         uses: actions/setup-java@v4
@@ -115,3 +106,27 @@ jobs:
           name: app-foss-release
           path: androidApp/build/outputs/apk/release/*.apk
 
+  publish-release:
+    name: Publish GitHub release
+    needs: [build-full-release, build-foss-release]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Download signed APKs
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          gh release create "$tag" \
+            --title "EchoBox $tag" \
+            --generate-notes \
+            dist/*.apk
