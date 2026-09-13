@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.click
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.alzimer.echobox.domain.mediaservice.handler.ControlState
 import com.alzimer.echobox.domain.mediaservice.handler.RepeatState
@@ -77,7 +78,10 @@ class PlayerControlLayoutTest {
                 )
             }
         }
-        composeRule.onRoot().performTouchInput { click(center) }
+        // The layout is a 96.dp-tall row at the TOP of the test surface — a tap at root centre
+        // lands far below the controls. Tap the row's vertical midline instead.
+        val rowMidY = with(composeRule.density) { 48.dp.toPx() }
+        composeRule.onRoot().performTouchInput { click(Offset(center.x, rowMidY)) }
         composeRule.waitForIdle()
         assertTrue(UIEvent.PlayPause in events)
     }
@@ -93,7 +97,8 @@ class PlayerControlLayoutTest {
                 )
             }
         }
-        composeRule.onRoot().performTouchInput { click(Offset(width * 0.12f, center.y)) }
+        val rowMidY = with(composeRule.density) { 48.dp.toPx() }
+        composeRule.onRoot().performTouchInput { click(Offset(width * 0.12f, rowMidY)) }
         composeRule.waitForIdle()
         assertTrue(UIEvent.Shuffle in events)
     }

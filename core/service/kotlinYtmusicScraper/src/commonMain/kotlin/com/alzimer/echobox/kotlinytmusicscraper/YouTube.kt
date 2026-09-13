@@ -125,7 +125,7 @@ private const val TAG = "YouTubeScraper"
  *
  * Here is the object that can create all request to YouTube Music and Spotify in EchoBox
  * Using YouTube Internal API
- * @author maxrave-dev
+ * @author alzimerahmed
  */
 
 class YouTube {

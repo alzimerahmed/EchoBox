@@ -121,9 +121,8 @@
     <string name="about_us">हमारे बारे में</string>
     <string name="version">संस्करण</string>
     <string name="github">गिट्हब</string>
-    <string name="alzimer_dev">मैक्सरेव-देव</string>
+    <string name="app_author">मैक्सरेव-देव</string>
     <string name="buy_me_a_coffee">मुझे एक कॉफी खरीदें</string>
-    <string name="developer_blog">डेवलपर ब्लॉग</string>
     <string name="paypal">पेयपाल</string>
     <string name="title">शीर्षक</string>
     <string name="album">एल्बम</string>
@@ -271,7 +270,7 @@
     <string name="older_first">पुराने पहले</string>
     <string name="newer_first">नए पहले</string>
     <string name="added_date">जोड़ने की तिथि</string>
-    <string name="credit_app">बैकएंड के लिए YouTube Music का उपयोग करने वाला एक सरल संगीत ऐप \n\nEchoBox YouTube और YouTube Music से बिना विज्ञापनों और ट्रैकिंग के संगीत स्ट्रीम करने के लिए एक ओपन सोर्स प्रोजेक्ट है। EchoBox कई सुविधाएं प्रदान करता है:\n\n - संगीत स्ट्रीमिंग \n - सिंक किए गए गाने के बोल\n - व्यक्तिगत डेटा\n - और बहुत कुछ… \n\nEchoBox हमेशा मुफ्त और बिना विज्ञापनों के है\n\nतुआन मिन्ह न्गुयेन डक (maxrave-dev) द्वारा ❤️ से बनाया गया</string>
+    <string name="credit_app">बैकएंड के लिए YouTube Music का उपयोग करने वाला एक सरल संगीत ऐप \n\nEchoBox YouTube और YouTube Music से बिना विज्ञापनों और ट्रैकिंग के संगीत स्ट्रीम करने के लिए एक ओपन सोर्स प्रोजेक्ट है। EchoBox कई सुविधाएं प्रदान करता है:\n\n - संगीत स्ट्रीमिंग \n - सिंक किए गए गाने के बोल\n - व्यक्तिगत डेटा\n - और बहुत कुछ… \n\nEchoBox हमेशा मुफ्त और बिना विज्ञापनों के है\n\nAlzimer Ahmed द्वारा ❤️ से बनाया गया</string>
     <string name="issue_tracker">समस्या ट्रैकर</string>
     <string name="featured_playlists">विशेष प्लेलिस्ट</string>
     <string name="featured_inArtist">पर प्रदर्शित</string>
@@ -395,7 +394,7 @@
     <string name="later">बाद में</string>
     <string name="give_a_star">एक सितारा दें</string>
     <string name="enjoying_echobox">सिम्पम्यूजिक का आनंद ले रहे हैं</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">यदि आपको सिम्पम्यूजिक का उपयोग करना अच्छा लगता है, तो गिटहब पर सिम्पम्यूजिक को स्टार करें या समीक्षा लिखें</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">यदि आपको सिम्पम्यूजिक का उपयोग करना अच्छा लगता है, तो गिटहब पर सिम्पम्यूजिक को स्टार करें या समीक्षा लिखें</string>
     <string name="if_you_love_my_work_consider">"अगर आपको मेरा काम पसंद आए, तो "</string>
     <string name="buying_me_a_coffee">मुझे एक कॉफ़ी देकर समर्थन करें।</string>
     <string name="fade_audio_effect">ऑडियो प्रभाव फीका करें</string>

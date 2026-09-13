@@ -575,10 +575,6 @@ interface DataStoreManager {
 
     suspend fun setLocalFilesLastScan(time: Long)
 
-    val blogNotificationEnabled: Flow<String>
-
-    suspend fun setBlogNotificationEnabled(enabled: Boolean)
-
     // Auto Backup
     val autoBackupEnabled: Flow<String>
 

@@ -91,7 +91,6 @@ kotlin {
         val androidHostTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
-                implementation(libs.coroutines.test)
                 implementation(libs.turbine)
                 implementation(libs.robolectric)
                 implementation(libs.androidx.junit)

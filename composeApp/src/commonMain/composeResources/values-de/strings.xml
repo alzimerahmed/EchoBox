@@ -121,10 +121,8 @@
     <string name="about_us">Über uns</string>
     <string name="version">Version</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Spendiere mir einen Kaffee</string>
-    <string name="developer_blog">Entwickler-Blog</string>
-    <string name="developer_blog_tagline">Lesen Sie Entwicklernotizen, Tutorials &amp; hinter den Kulissen</string>
     <string name="visit_blog">Blog besuchen</string>
     <string name="paypal">PayPal</string>
     <string name="title">Titel</string>
@@ -454,7 +452,7 @@
     <string name="later">später</string>
     <string name="give_a_star">Gebe einen Stern</string>
     <string name="enjoying_echobox">Spaß an EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Wenn dir EchoBox gefällt, gib EchoBox einen Stern auf Github oder lasse eine Rezension da</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Wenn dir EchoBox gefällt, gib EchoBox einen Stern auf Github oder lasse eine Rezension da</string>
     <string name="if_you_love_my_work_consider">"Wenn Dumeine Arbeit liebst, denk darüber nach "</string>
     <string name="buying_me_a_coffee">Mir einen Kaffee zu kaufen.</string>
     <string name="fade_audio_effect">Fade Audioeffekt</string>
@@ -641,8 +639,6 @@
     <string name="quit_app">App beenden</string>
     <string name="local_tracking_title">Lokale Aufzeichnung des Wiedergabeverlaufs</string>
     <string name="local_tracking_description">Zeichne den Wiedergabeverlauf in der lokalen Datenbank auf</string>
-    <string name="blog_notification_title">Benachrichtigungen zu Blogbeiträgen</string>
-    <string name="blog_notification_description">Werde benachrichtigt wenn ein neuer Blog-Beitrag veröffentlicht wird</string>
     <string name="echobox_charts">EchoBox Charts</string>
     <string name="crossfading">Crossfading (überblenden)</string>
     <string name="your_320kbps_url">Deine 320kbps URL</string>

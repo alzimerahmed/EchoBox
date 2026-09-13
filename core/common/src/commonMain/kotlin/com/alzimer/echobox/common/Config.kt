@@ -674,9 +674,11 @@ const val LOCAL_FILES_SOURCE_ID = "LOCAL_FILES"
 
 fun String.isLocalFileId(): Boolean = startsWith(LOCAL_FILE_ID_PREFIX)
 
-/** MediaStore audio URI for a local track id — `local_42` -> `content://media/external/audio/media/42`. */
+/** MediaStore audio URI for a local track id — `local_42` -> `content://media/external/audio/media/42`.
+ *  Non-numeric suffixes resolve to id -1 (matches no row) instead of an arbitrary URI path. */
 fun localFileContentUri(videoId: String): String =
-    "content://media/external/audio/media/" + videoId.removePrefix(LOCAL_FILE_ID_PREFIX)
+    "content://media/external/audio/media/" +
+        (videoId.removePrefix(LOCAL_FILE_ID_PREFIX).toLongOrNull() ?: -1L)
 const val ASC = "ASC"
 const val DESC = "DESC"
 const val CUSTOM_ORDER = "CUSTOM_ORDER"

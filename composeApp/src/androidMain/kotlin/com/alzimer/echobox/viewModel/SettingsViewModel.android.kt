@@ -249,7 +249,16 @@ private fun restoreFolder(
 
     // Extract relative path from entry name
     val relativePath = entryName.removePrefix("$baseFolderName/")
-    val targetFile = application.filesDir / baseFolderName / relativePath
+    val baseDir = application.filesDir / baseFolderName
+    val targetFile = baseDir / relativePath
+
+    // Zip-slip guard: a crafted entry like "download/../../shared_prefs/x" must never
+    // write outside the download folder. Canonical paths resolve "..", symlinks, and
+    // absolute-path tricks, so this is the single check that matters.
+    if (!targetFile.canonicalPath.startsWith(baseDir.canonicalPath + File.separator)) {
+        Logger.e("BackupRestore", "Refusing traversal entry: $entryName")
+        return
+    }
 
     Logger.d("BackupRestore", "Target file path: ${targetFile.absolutePath}")
     Logger.d("BackupRestore", "Relative path: $relativePath")

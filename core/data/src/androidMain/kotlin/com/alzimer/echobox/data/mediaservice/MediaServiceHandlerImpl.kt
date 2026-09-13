@@ -563,7 +563,7 @@ internal class MediaServiceHandlerImpl(
         if (videoId.isNullOrEmpty() || videoId.isLocalFileId()) {
             ""
         } else {
-            "http://i.ytimg.com/vi/$videoId/maxresdefault.jpg"
+            "https://i.ytimg.com/vi/$videoId/maxresdefault.jpg"
         }
 
     private fun getDataOfNowPlayingState(mediaItem: GenericMediaItem) {

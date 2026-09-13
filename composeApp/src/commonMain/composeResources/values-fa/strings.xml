@@ -121,9 +121,8 @@
     <string name="about_us">درباره ما</string>
     <string name="version">نگارش</string>
     <string name="github">گیت‌هاب</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">برای من یک قهوه بخر</string>
-    <string name="developer_blog">وبلاگ توسعه دهنده</string>
     <string name="paypal">پی‌پال</string>
     <string name="title">عنوان</string>
     <string name="custom_order">مرتب‌سازی سفارشی</string>
@@ -408,7 +407,7 @@
     <string name="later">بعدا</string>
     <string name="give_a_star">ستاره بدید</string>
     <string name="enjoying_echobox">از EchoBox لذت می‌بری</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">اگر از استفاده از EchoBox لذت می‌برید، به EchoBox در GitHub ستاره دهید یا نظر خود را درباره آن بنویسید</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">اگر از استفاده از EchoBox لذت می‌برید، به EchoBox در GitHub ستاره دهید یا نظر خود را درباره آن بنویسید</string>
     <string name="if_you_love_my_work_consider">"اگر از کار من خوشتان می‌آید، لطفاً "</string>
     <string name="buying_me_a_coffee">یک قهوه برایم بخرید.</string>
     <string name="fade_audio_effect">افکت محو صدا</string>

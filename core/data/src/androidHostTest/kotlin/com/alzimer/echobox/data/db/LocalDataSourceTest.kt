@@ -8,6 +8,7 @@ import com.alzimer.echobox.domain.data.entities.SearchHistory
 import org.junit.runner.RunWith
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
+import kotlinx.datetime.LocalDateTime
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -64,7 +65,11 @@ class LocalDataSourceTest {
 
     @Test
     fun getAllSongsRespectsLimit() = runBlocking {
-        (1..5).forEach { dataSource.insertSong(testSong("v$it")) }
+        // inLibrary is stored at millisecond precision — a fast insert loop can tie, and SQLite
+        // defines no order within a tie. Give each row a distinct timestamp.
+        (1..5).forEach {
+            dataSource.insertSong(testSong("v$it").copy(inLibrary = LocalDateTime(2026, 1, 1, 0, it, 0)))
+        }
 
         val songs = dataSource.getAllSongs(limit = 3)
 

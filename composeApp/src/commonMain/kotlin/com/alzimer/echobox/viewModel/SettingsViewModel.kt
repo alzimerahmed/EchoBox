@@ -241,9 +241,6 @@ class SettingsViewModel(
     private val _localFilesLastScan = MutableStateFlow(0L)
     val localFilesLastScan: StateFlow<Long> = _localFilesLastScan
 
-    private val _blogNotificationEnabled = MutableStateFlow(true)
-    val blogNotificationEnabled: StateFlow<Boolean> = _blogNotificationEnabled
-
     // Auto Backup
     private val _autoBackupEnabled = MutableStateFlow<Boolean>(false)
     val autoBackupEnabled: StateFlow<Boolean> = _autoBackupEnabled
@@ -348,7 +345,6 @@ class SettingsViewModel(
         getDownloadQuality()
         getVideoDownloadQuality()
         getLocalTrackingEnabled()
-        getBlogNotificationEnabled()
         getAutoBackupEnabled()
         getLocalFilesEnabled()
         getLocalFilesLastScan()
@@ -434,21 +430,6 @@ class SettingsViewModel(
     fun toastLocalFilesDenied() {
         viewModelScope.launch {
             makeToast(formatString(Res.string.local_files_permission_denied))
-        }
-    }
-
-    private fun getBlogNotificationEnabled() {
-        viewModelScope.launch {
-            dataStoreManager.blogNotificationEnabled.collect { enabled ->
-                _blogNotificationEnabled.value = enabled == DataStoreManager.TRUE
-            }
-        }
-    }
-
-    fun setBlogNotificationEnabled(enabled: Boolean) {
-        viewModelScope.launch {
-            dataStoreManager.setBlogNotificationEnabled(enabled)
-            getBlogNotificationEnabled()
         }
     }
 

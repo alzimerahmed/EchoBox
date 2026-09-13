@@ -2,6 +2,7 @@ package com.alzimer.echobox.ui.screen.library
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
@@ -179,25 +181,27 @@ fun LocalFilesTab(
                             // announces its result to a screen reader.
                             .semantics { liveRegion = LiveRegionMode.Polite },
                 )
-                if (scanning) {
-                    CircularProgressIndicator(
-                        modifier =
-                            Modifier
-                                .size(40.dp)
-                                .padding(10.dp),
-                        strokeWidth = 2.dp,
-                    )
-                } else {
+                // The button's semantics node stays in the tree while scanning — swapping it
+                // for the spinner would drop a TalkBack user's focus mid-action. The spinner
+                // just covers the (alpha-hidden) icon.
+                Box(contentAlignment = Alignment.Center) {
                     RippleIconButton(
                         imageVector = SimpIcons.Sync,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         // RippleIconButton hardcodes no label — set it semantically here.
                         modifier =
-                            Modifier.semantics {
-                                contentDescription = rescanLabel
-                            },
+                            Modifier
+                                .semantics {
+                                    contentDescription = rescanLabel
+                                }.alpha(if (scanning) 0f else 1f),
                     ) {
-                        viewModel.rescan()
+                        if (!scanning) viewModel.rescan()
+                    }
+                    if (scanning) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(20.dp),
+                            strokeWidth = 2.dp,
+                        )
                     }
                 }
             }

@@ -121,10 +121,8 @@
     <string name="about_us">정보</string>
     <string name="version">버전</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Buy me a coffee</string>
-    <string name="developer_blog">개발자 블로그</string>
-    <string name="developer_blog_tagline">개발 노트, 튜토리얼 &amp; 비하인드 스토리를 읽어보세요</string>
     <string name="visit_blog">블로그 방문하기</string>
     <string name="paypal">PayPal</string>
     <string name="title">제목</string>
@@ -423,7 +421,7 @@
     <string name="later">나중에</string>
     <string name="give_a_star">별 주기</string>
     <string name="enjoying_echobox">EchoBox을 즐기고 계신가요</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">EchoBox을 잘 이용하고 계신다면, GitHub에서 EchoBox에 별을 주거나 리뷰를 남겨주세요</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">EchoBox을 잘 이용하고 계신다면, GitHub에서 EchoBox에 별을 주거나 리뷰를 남겨주세요</string>
     <string name="if_you_love_my_work_consider">"앱이 마음에 드시면, "</string>
     <string name="buying_me_a_coffee">커피 한 잔으로 응원해주세요.</string>
     <string name="fade_audio_effect">음향 페이드 효과</string>
@@ -579,8 +577,6 @@
     <string name="quit_app">앱 종료</string>
     <string name="local_tracking_title">로컬 재생 기록 추적</string>
     <string name="local_tracking_description">로컬 데이터베이스에 나의 재생 기록 저장</string>
-    <string name="blog_notification_title">블로그 포스트 알림</string>
-    <string name="blog_notification_description">새로운 블로그가 올라오면 알림 받기</string>
     <string name="echobox_charts">Simpmusic 차트</string>
     <string name="crossfading">크로스페이드 중</string>
     <string name="your_320kbps_url">320kbps URL</string>

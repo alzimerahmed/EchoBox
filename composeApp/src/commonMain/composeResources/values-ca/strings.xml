@@ -121,10 +121,8 @@
     <string name="about_us">Sobre nosaltres</string>
     <string name="version">Versió</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Compra'm un cafè</string>
-    <string name="developer_blog">Blog del desenvolupador</string>
-    <string name="developer_blog_tagline">Llegir notes de desenvolupament, tutorials &amp; continguts entre bastidors</string>
     <string name="visit_blog">Visita el blog</string>
     <string name="paypal">PayPal</string>
     <string name="title">Títol</string>
@@ -276,7 +274,7 @@
     <string name="older_first">Més antics primer</string>
     <string name="newer_first">Més nous primer</string>
     <string name="added_date">Data afegida</string>
-    <string name="credit_app">Una aplicació de música senzilla que utilitza YouTube Music per al backend \n\nEchoBox és un projecte de codi obert per reproduir música de YouTube i YouTube Music sense anuncis ni seguiment. EchoBox ofereix moltes funcions:\n\n - Reproducció de música en temps real \n - Lletres sincronitzades\n - Personalització de dades\n - etc... \n\nEchoBox sempre és gratuït i sense anuncis\n\nCrea amb ❤️ de Tuan Minh Nguyen Duc (alzimer -dev)</string>
+    <string name="credit_app">Una aplicació de música senzilla que utilitza YouTube Music per al backend \n\nEchoBox és un projecte de codi obert per reproduir música de YouTube i YouTube Music sense anuncis ni seguiment. EchoBox ofereix moltes funcions:\n\n - Reproducció de música en temps real \n - Lletres sincronitzades\n - Personalització de dades\n - etc... \n\nEchoBox sempre és gratuït i sense anuncis\n\nCrea amb ❤️ de Alzimer Ahmed (alzimer -dev)</string>
     <string name="issue_tracker">Detector de problemes</string>
     <string name="featured_playlists">Llistes de reproducció destacades</string>
     <string name="featured_inArtist">Destacat a</string>
@@ -406,7 +404,7 @@
     <string name="later">Més tard</string>
     <string name="give_a_star">Dona una estrella</string>
     <string name="enjoying_echobox">Està gaudint de EchoBox?</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Si està gaudint de EchoBox, doni-li una estrella a GitHub o deixi una ressenya a</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Si està gaudint de EchoBox, doni-li una estrella a GitHub o deixi una ressenya a</string>
     <string name="if_you_love_my_work_consider">"Si t'agrada el meu treball, considera"</string>
     <string name="buying_me_a_coffee">invitar-me a un cafè.</string>
     <string name="fade_audio_effect">Efecte d'atenuació de l'àudio</string>

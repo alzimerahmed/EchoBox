@@ -121,10 +121,8 @@
     <string name="about_us">Sobre nosotros</string>
     <string name="version">Versión</string>
     <string name="github">GitHub</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Cómprame un café</string>
-    <string name="developer_blog"></string>
-    <string name="developer_blog_tagline">Leer notas de desarrollo, tutoriales &amp; detrás de la escena</string>
     <string name="visit_blog">Visita el blog</string>
     <string name="paypal">PayPal</string>
     <string name="title">Título</string>
@@ -446,7 +444,7 @@
     <string name="later">Más tarde</string>
     <string name="give_a_star">Dar una estrella</string>
     <string name="enjoying_echobox">Disfrutando EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Si te gusta usar EchoBox, da una estrella a EchoBox en gituhb o deja una reseña</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Si te gusta usar EchoBox, da una estrella a EchoBox en gituhb o deja una reseña</string>
     <string name="if_you_love_my_work_consider">"Si amas mi trabajo, considera "</string>
     <string name="buying_me_a_coffee">comprame un café.</string>
     <string name="fade_audio_effect">Efecto de desvanecimiento de audio</string>
@@ -615,8 +613,6 @@
     <string name="quit_app">Salir</string>
     <string name="local_tracking_title">Historial de escuchas local de seguimiento</string>
     <string name="local_tracking_description">Registra tu historial de escucha en la base de datos local</string>
-    <string name="blog_notification_title">Notificaciones de publicaciones del blog</string>
-    <string name="blog_notification_description">Recibe una notificación cuando se publique una nueva entrada del blog</string>
     <string name="echobox_charts">Gráficos EchoBox</string>
     <string name="crossfading">Crossfade</string>
     <string name="your_320kbps_url">Su URL de 320kbps</string>

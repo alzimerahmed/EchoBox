@@ -46,6 +46,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.draw.clip
@@ -99,6 +100,8 @@ import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.add_to_queue
 import echobox.composeapp.generated.resources.album
 import echobox.composeapp.generated.resources.artists
+import echobox.composeapp.generated.resources.downloaded
+import echobox.composeapp.generated.resources.more
 import echobox.composeapp.generated.resources.playlist
 import echobox.composeapp.generated.resources.podcasts
 import echobox.composeapp.generated.resources.radio
@@ -338,7 +341,7 @@ fun SongFullWidthItems(
                                 Icon(
                                     imageVector = SimpIcons.DownloadForOffline,
                                     tint = contentColor,
-                                    contentDescription = "",
+                                    contentDescription = stringResource(Res.string.downloaded),
                                     modifier = Modifier.size(16.dp).padding(2.dp),
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
@@ -382,7 +385,16 @@ fun SongFullWidthItems(
                 // Hidden while selecting: the per-item menu moves up to the selection app bar,
                 // so one tap cannot mean both "act on this song" and "pick this song".
                 if (onMoreClickListener != null && !selectionMode) {
-                    RippleIconButton(imageVector = SimpIcons.MoreVert, fillMaxSize = false, tint = contentColor) {
+                    // RippleIconButton hardcodes no label — set it semantically here so the
+                    // per-song sheet is reachable under TalkBack. Hoisted: semantics lambdas
+                    // are not composable scope.
+                    val moreDescription = stringResource(Res.string.more)
+                    RippleIconButton(
+                        imageVector = SimpIcons.MoreVert,
+                        fillMaxSize = false,
+                        tint = contentColor,
+                        modifier = Modifier.semantics { contentDescription = moreDescription },
+                    ) {
                         if (itemVideoId.isNotBlank()) onMoreClickListener.invoke(itemVideoId)
                     }
                 }

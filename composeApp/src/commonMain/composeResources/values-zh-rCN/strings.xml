@@ -121,10 +121,8 @@
     <string name="about_us">关于我们</string>
     <string name="version">版本</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">请我喝杯咖啡（捐赠）</string>
-    <string name="developer_blog">开发者博客</string>
-    <string name="developer_blog_tagline">阅读开发日志、教程及幕后花絮</string>
     <string name="visit_blog">访问博客</string>
     <string name="paypal">PayPal</string>
     <string name="title">标题</string>
@@ -276,7 +274,7 @@
     <string name="older_first">较早的优先</string>
     <string name="newer_first">较新的在前</string>
     <string name="added_date">已添加日期</string>
-    <string name="credit_app">使用 YouTube Music 作为后端的简单音乐应用 \n\nEchoBox 是一个开源项目，可以在没有广告和跟踪的情况下从 YouTube 和 YouTube Music 中流式播放音乐。EchoBox 提供许多功能：\n\n - 流媒体音乐 \n - 同步歌词 \n - 个性化数据 \n -等等… \n\nEchoBox始终是免费的，没有广告\n\n Tuan Minh Nguyen Duc(Maxrave-dev) 用 ❤️ 构建</string>
+    <string name="credit_app">使用 YouTube Music 作为后端的简单音乐应用 \n\nEchoBox 是一个开源项目，可以在没有广告和跟踪的情况下从 YouTube 和 YouTube Music 中流式播放音乐。EchoBox 提供许多功能：\n\n - 流媒体音乐 \n - 同步歌词 \n - 个性化数据 \n -等等… \n\nEchoBox始终是免费的，没有广告\n\n Alzimer Ahmed(Maxrave-dev) 用 ❤️ 构建</string>
     <string name="issue_tracker">问题跟踪</string>
     <string name="featured_playlists">精选歌单</string>
     <string name="featured_inArtist">精选开启</string>
@@ -414,7 +412,7 @@
     <string name="later">稍后询问</string>
     <string name="give_a_star">给颗星星</string>
     <string name="enjoying_echobox">享受EchoBox吧</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">如果你喜欢EchoBox，别忘了在Github给EchoBox点星星或留好评</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">如果你喜欢EchoBox，别忘了在Github给EchoBox点星星或留好评</string>
     <string name="if_you_love_my_work_consider">"如果你喜欢我的工作，请考虑： "</string>
     <string name="buying_me_a_coffee">软件称心多雅意，薄酬一杯解劳辛。</string>
     <string name="fade_audio_effect">音频淡入淡出</string>
@@ -555,8 +553,6 @@
     <string name="quit_app">退出应用</string>
     <string name="local_tracking_title">在本地保存播放历史记录</string>
     <string name="local_tracking_description">将您的收听历史记录到本地数据库</string>
-    <string name="blog_notification_title">博客文章通知</string>
-    <string name="blog_notification_description">在开发者发布新博文时接收通知</string>
     <string name="echobox_charts">EchoBox 排行榜</string>
     <string name="crossfading">交叉淡入淡出</string>
     <string name="your_320kbps_url">您的 320kbps URL</string>

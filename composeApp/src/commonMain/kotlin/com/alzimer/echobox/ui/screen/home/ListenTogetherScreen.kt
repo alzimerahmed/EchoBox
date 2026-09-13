@@ -103,6 +103,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.listen_together
+import echobox.composeapp.generated.resources.lt_approve
 import echobox.composeapp.generated.resources.lt_background_warning
 import echobox.composeapp.generated.resources.lt_block
 import echobox.composeapp.generated.resources.lt_block_desc
@@ -110,6 +111,7 @@ import echobox.composeapp.generated.resources.lt_cancel_join
 import echobox.composeapp.generated.resources.lt_connect
 import echobox.composeapp.generated.resources.lt_connected
 import echobox.composeapp.generated.resources.lt_connecting
+import echobox.composeapp.generated.resources.lt_copy_code
 import echobox.composeapp.generated.resources.lt_create_room
 import echobox.composeapp.generated.resources.lt_credit_compatible
 import echobox.composeapp.generated.resources.lt_credit_protocol
@@ -126,7 +128,9 @@ import echobox.composeapp.generated.resources.lt_kick_desc
 import echobox.composeapp.generated.resources.lt_leave_room
 import echobox.composeapp.generated.resources.lt_not_connected
 import echobox.composeapp.generated.resources.lt_or_join_with_code
+import echobox.composeapp.generated.resources.lt_reject
 import echobox.composeapp.generated.resources.lt_room_code
+import echobox.composeapp.generated.resources.lt_share_code
 import echobox.composeapp.generated.resources.lt_suggestions
 import echobox.composeapp.generated.resources.lt_tagline
 import echobox.composeapp.generated.resources.lt_transfer_host
@@ -639,12 +643,12 @@ private fun RoomCodePoster(
                 // A silent clipboard write is indistinguishable from a dead button, and this one
                 // is the whole point of the screen — the tick is the only proof it did anything.
                 Crossfade(targetState = copied, label = "ltCopied") { done ->
-                    GlyphButton(if (done) SimpIcons.Check else SimpIcons.ContentCopy) {
+                    GlyphButton(if (done) SimpIcons.Check else SimpIcons.ContentCopy, stringResource(Res.string.lt_copy_code)) {
                         onCopyCode()
                         copied = true
                     }
                 }
-                GlyphButton(SimpIcons.Share, onShareCode)
+                GlyphButton(SimpIcons.Share, stringResource(Res.string.lt_share_code), onShareCode)
             }
         }
     }
@@ -747,8 +751,8 @@ private fun JoinRequests(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                ActionGlyph(SimpIcons.Check, MaterialTheme.colorScheme.primary) { onApprove(request.userId) }
-                ActionGlyph(SimpIcons.Close, MaterialTheme.colorScheme.error) { onReject(request.userId) }
+                ActionGlyph(SimpIcons.Check, MaterialTheme.colorScheme.primary, stringResource(Res.string.lt_approve)) { onApprove(request.userId) }
+                ActionGlyph(SimpIcons.Close, MaterialTheme.colorScheme.error, stringResource(Res.string.lt_reject)) { onReject(request.userId) }
             }
         }
     }
@@ -789,8 +793,8 @@ private fun Suggestions(
                         maxLines = 1,
                     )
                 }
-                ActionGlyph(SimpIcons.Check, MaterialTheme.colorScheme.primary) { onApprove(suggestion.suggestionId) }
-                ActionGlyph(SimpIcons.Close, MaterialTheme.colorScheme.error) { onReject(suggestion.suggestionId) }
+                ActionGlyph(SimpIcons.Check, MaterialTheme.colorScheme.primary, stringResource(Res.string.lt_approve)) { onApprove(suggestion.suggestionId) }
+                ActionGlyph(SimpIcons.Close, MaterialTheme.colorScheme.error, stringResource(Res.string.lt_reject)) { onReject(suggestion.suggestionId) }
             }
         }
     }
@@ -1088,18 +1092,19 @@ private fun Chip(
 @Composable
 private fun GlyphButton(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
+    description: String,
     onClick: () -> Unit,
 ) {
     Box(
         modifier =
             Modifier
-                .size(42.dp)
+                .size(44.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.12f))
                 .clickable { onClick() },
         contentAlignment = Alignment.Center,
     ) {
-        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.onBackground, modifier = Modifier.size(18.dp))
+        Icon(icon, contentDescription = description, tint = MaterialTheme.colorScheme.onBackground, modifier = Modifier.size(18.dp))
     }
 }
 
@@ -1107,18 +1112,19 @@ private fun GlyphButton(
 private fun ActionGlyph(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     tint: Color,
+    description: String,
     onClick: () -> Unit,
 ) {
     Box(
         modifier =
             Modifier
-                .size(32.dp)
+                .size(44.dp)
                 .clip(CircleShape)
                 .background(tint.copy(alpha = 0.16f))
                 .clickable { onClick() },
         contentAlignment = Alignment.Center,
     ) {
-        Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.size(16.dp))
+        Icon(icon, contentDescription = description, tint = tint, modifier = Modifier.size(16.dp))
     }
 }
 

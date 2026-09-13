@@ -121,10 +121,8 @@
     <string name="about_us">Tentang kami</string>
     <string name="version">Versi</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Belikan Aku secangkir kopi</string>
-    <string name="developer_blog">Blog Pengembang</string>
-    <string name="developer_blog_tagline">Baca catatan pengembang, tutorial &amp; cerita di balik layar</string>
     <string name="visit_blog">Kunjungi blog</string>
     <string name="paypal">PayPal</string>
     <string name="title">Judul</string>
@@ -421,7 +419,7 @@
     <string name="later">Nanti</string>
     <string name="give_a_star">Berikan bintang</string>
     <string name="enjoying_echobox">Menikmati EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Jika Anda menikmati penggunaan EchoBox, beri bintang pada EchoBox di GitHub atau tinggalkan ulasan di sana</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Jika Anda menikmati penggunaan EchoBox, beri bintang pada EchoBox di GitHub atau tinggalkan ulasan di sana</string>
     <string name="if_you_love_my_work_consider">"Jika Anda menyukai karya saya, pertimbangkan "</string>
     <string name="buying_me_a_coffee">membelikanku secangkir kopi.</string>
     <string name="fade_audio_effect">Efek audio memudar</string>
@@ -547,8 +545,6 @@
     <string name="quit_app">Keluar aplikasi</string>
     <string name="local_tracking_title">Riwayat mendengarkan pelacakan lokal</string>
     <string name="local_tracking_description">Catat riwayat mendengarkan Anda ke basis data lokal</string>
-    <string name="blog_notification_title">Pemberitahuan postingan blog</string>
-    <string name="blog_notification_description">Dapatkan pemberitahuan saat ada postingan blog baru yang diterbitkan</string>
     <string name="echobox_charts">Tangga lagu EchoBox</string>
     <string name="crossfading">Memudar</string>
     <string name="your_320kbps_url">URL 320kbps Anda</string>

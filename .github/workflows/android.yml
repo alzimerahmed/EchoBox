@@ -50,7 +50,10 @@ jobs:
   build:
     needs: unit-tests
     runs-on: ubuntu-latest
+    # Signing + Sentry/Last.fm secrets must never reach a PR-modified workflow run.
+    if: github.event_name != 'pull_request'
     steps:
+      - uses: actions/checkout@v4
 
       - name: set up JDK 21
         uses: actions/setup-java@v4
@@ -69,16 +72,16 @@ jobs:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
-          echo 'SENTRY_DSN=${{ secrets.SENTRY_DSN }}' > ./local.properties
-          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> ./local.properties
+          printf '%s\n' "SENTRY_DSN=$SENTRY_DSN" > ./local.properties
+          printf '%s\n' "SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN" >> ./local.properties
 
       - name: Update Last.fm secrets
         env:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
         run: |
-          echo "LASTFM_API_KEY=${{ secrets.LASTFM_API_KEY }}" >> ./local.properties
-          echo "LASTFM_SECRET=${{ secrets.LASTFM_SECRET }}" >> ./local.properties
+          printf '%s\n' "LASTFM_API_KEY=$LASTFM_API_KEY" >> ./local.properties
+          printf '%s\n' "LASTFM_SECRET=$LASTFM_SECRET" >> ./local.properties
 
       - name: Generate aboutLibraries.json
         run: ./gradlew exportLibraryDefinitions
@@ -93,7 +96,7 @@ jobs:
           echo "BUILD_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
           echo Last build tool version is: $BUILD_TOOL_VERSION
 
-      - uses: kevin-david/zipalign-sign-android-release@v2
+      - uses: kevin-david/zipalign-sign-android-release@b23618daede736020fbc59c16e8c2ff0ef8e09dc # v2
         id: sign_app
         with:
           releaseDirectory: androidApp/build/outputs/apk/release

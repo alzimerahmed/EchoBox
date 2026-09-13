@@ -18,6 +18,7 @@ import com.alzimer.echobox.ui.theme.typo
 import org.jetbrains.compose.resources.stringResource
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.exit_selection
+import echobox.composeapp.generated.resources.more
 import echobox.composeapp.generated.resources.n_selected
 import echobox.composeapp.generated.resources.select_all
 
@@ -79,7 +80,7 @@ fun SongSelectionTopAppBar(
                 IconButton(onClick = onOpenActions) {
                     Icon(
                         imageVector = SimpIcons.MoreVert,
-                        contentDescription = null,
+                        contentDescription = stringResource(Res.string.more),
                     )
                 }
             }

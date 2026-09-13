@@ -201,8 +201,6 @@ import echobox.composeapp.generated.resources.backup_downloaded_description
 import echobox.composeapp.generated.resources.backup_frequency
 import echobox.composeapp.generated.resources.balance_media_loudness
 import echobox.composeapp.generated.resources.better_lyrics
-import echobox.composeapp.generated.resources.blog_notification_description
-import echobox.composeapp.generated.resources.blog_notification_title
 import echobox.composeapp.generated.resources.buy_me_a_coffee
 import echobox.composeapp.generated.resources.cancel
 import echobox.composeapp.generated.resources.animated_artwork_info
@@ -239,8 +237,6 @@ import echobox.composeapp.generated.resources.daily
 import echobox.composeapp.generated.resources.database
 import echobox.composeapp.generated.resources.default_models
 import echobox.composeapp.generated.resources.description_and_licenses
-import echobox.composeapp.generated.resources.developer_blog
-import echobox.composeapp.generated.resources.developer_blog_tagline
 import echobox.composeapp.generated.resources.discord_integration
 import echobox.composeapp.generated.resources.donation
 import echobox.composeapp.generated.resources.download_quality
@@ -335,7 +331,7 @@ import echobox.composeapp.generated.resources.lyrics_style_apple_music
 import echobox.composeapp.generated.resources.lyrics_style_classic
 import echobox.composeapp.generated.resources.main_lyrics_provider
 import echobox.composeapp.generated.resources.manage_your_youtube_accounts
-import echobox.composeapp.generated.resources.alzimer_dev
+import echobox.composeapp.generated.resources.app_author
 import echobox.composeapp.generated.resources.monthly
 import echobox.composeapp.generated.resources.never
 import echobox.composeapp.generated.resources.no_account
@@ -525,7 +521,6 @@ fun SettingScreen(
                 viewModel.toastLocalFilesDenied()
             }
         }
-    val blogNotificationEnabled by viewModel.blogNotificationEnabled.collectAsStateWithLifecycle()
     val combineLocalAndYouTubeLiked by viewModel.combineLocalAndYouTubeLiked.collectAsStateWithLifecycle()
     val playVideo by remember { viewModel.playVideoInsteadOfAudio.map { it == TRUE } }.collectAsStateWithLifecycle(initialValue = false)
     val radioAudioOnly by remember { viewModel.radioAudioOnly.map { it == TRUE } }.collectAsStateWithLifecycle(initialValue = false)
@@ -2704,30 +2699,16 @@ fun SettingScreen(
                 )
                 SettingItem(
                     title = stringResource(Res.string.author),
-                    subtitle = stringResource(Res.string.alzimer_dev),
+                    subtitle = stringResource(Res.string.app_author),
                     onClick = {
                         uriHandler.openUri("https://github.com/alzimerahmed/EchoBox")
                     },
                 )
                 SettingItem(
-                    title = stringResource(Res.string.developer_blog),
-                    subtitle = stringResource(Res.string.developer_blog_tagline),
-                    onClick = {
-                        uriHandler.openUri("https://alzimer.dev")
-                    },
-                )
-                if (getPlatform() == Platform.Android) {
-                    SettingItem(
-                        title = stringResource(Res.string.blog_notification_title),
-                        subtitle = stringResource(Res.string.blog_notification_description),
-                        switch = (blogNotificationEnabled to { viewModel.setBlogNotificationEnabled(it) }),
-                    )
-                }
-                SettingItem(
                     title = stringResource(Res.string.buy_me_a_coffee),
                     subtitle = stringResource(Res.string.donation),
                     onClick = {
-                        uriHandler.openUri("https://github.com/sponsors/maxrave-dev")
+                        uriHandler.openUri("https://github.com/sponsors/alzimerahmed")
                     },
                 )
                 SettingItem(

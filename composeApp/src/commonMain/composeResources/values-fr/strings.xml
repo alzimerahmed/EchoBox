@@ -121,10 +121,8 @@
     <string name="about_us">À propos de nous</string>
     <string name="version">Version</string>
     <string name="github">GitHub</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Offrez-moi un café ! ☕</string>
-    <string name="developer_blog">Blog des Développeurs</string>
-    <string name="developer_blog_tagline">Lisez les notes des développeurs, les tutoriels &amp; les coulisses du projet</string>
     <string name="visit_blog">Consultez le blog</string>
     <string name="paypal">PayPal</string>
     <string name="title">Titre</string>
@@ -465,7 +463,7 @@
     <string name="later">Plus tard</string>
     <string name="give_a_star">Donner une étoile</string>
     <string name="enjoying_echobox">Vous appréciez EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Si vous aimez utiliser EchoBox, donnez une étoile à EchoBox sur GitHub ou laissez un avis sur</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Si vous aimez utiliser EchoBox, donnez une étoile à EchoBox sur GitHub ou laissez un avis sur</string>
     <string name="if_you_love_my_work_consider">"Si vous aimez mon travail, considérez "</string>
     <string name="buying_me_a_coffee">m'offrir un café.</string>
     <string name="fade_audio_effect">Effet de fondu audio</string>
@@ -652,8 +650,6 @@
     <string name="quit_app">Quitter l'application</string>
     <string name="local_tracking_title">Historique d'écoute local</string>
     <string name="local_tracking_description">Enregistrez votre historique d'écoute dans une base de données locale</string>
-    <string name="blog_notification_title">Notifications relatives aux articles de blog</string>
-    <string name="blog_notification_description">Recevez une notification dès qu'un nouvel article de blog est publié</string>
     <string name="echobox_charts">Classements EchoBox</string>
     <string name="crossfading">Fondu enchaîné</string>
     <string name="your_320kbps_url">Votre URL 320 kbps</string>

@@ -121,7 +121,7 @@
     <string name="about_us">За нас</string>
     <string name="version">Версия</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Buy me a coffee</string>
     <string name="paypal">PayPal</string>
     <string name="title">Заглавие</string>
@@ -397,7 +397,7 @@
     <string name="later">По-късно</string>
     <string name="give_a_star">Оцени</string>
     <string name="enjoying_echobox">Доволни от EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Оценете EchoBox в GitHub или оставете ревю ако сте доволни</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Оценете EchoBox в GitHub или оставете ревю ако сте доволни</string>
     <string name="if_you_love_my_work_consider">"Ако сте доволни от работата ми, моля помислете да "</string>
     <string name="buying_me_a_coffee">ме почерпите кафе.</string>
     <string name="fade_audio_effect">Постепенно намаляване на звука</string>

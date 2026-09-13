@@ -121,10 +121,8 @@
     <string name="about_us">Về tôi</string>
     <string name="version">Phiên bản</string>
     <string name="github">Github</string>
-    <string name="alzimer_dev">Alzimer Ahmed</string>
+    <string name="app_author">Alzimer Ahmed</string>
     <string name="buy_me_a_coffee">Hỗ trợ tôi</string>
-    <string name="developer_blog">Blog của nhà phát triển</string>
-    <string name="developer_blog_tagline">Đọc các ghi chép của nhà phát triển, hướng dẫn &amp; đằng sau các tính năng</string>
     <string name="visit_blog">Ghé thăm blog</string>
     <string name="paypal">PayPal</string>
     <string name="title">Tiêu đề</string>
@@ -277,7 +275,7 @@
     <string name="older_first">Cũ trước</string>
     <string name="newer_first">Mới trước</string>
     <string name="added_date">Ngày thêm vào</string>
-    <string name="credit_app">Một ứng dụng âm nhạc đơn giản sử dụng dữ liệu từ YouTube Music \n\nEchoBox là một dự án nguồn mở để phát nhạc từ YouTube và YouTube Music mà không bị quảng cáo và theo dõi. EchoBox cung cấp nhiều tính năng:\n\n - Phát nhạc \n - Lời bài hát được đồng bộ hóa\n - Cá nhân hóa dữ liệu\n - v.v… \n\nEchoBox luôn miễn phí và không có quảng cáo\n\nXây dựng với ❤️ bởi Nguyên Đức Tuấn Minh (maxrave-dev)</string>
+    <string name="credit_app">Một ứng dụng âm nhạc đơn giản sử dụng dữ liệu từ YouTube Music \n\nEchoBox là một dự án nguồn mở để phát nhạc từ YouTube và YouTube Music mà không bị quảng cáo và theo dõi. EchoBox cung cấp nhiều tính năng:\n\n - Phát nhạc \n - Lời bài hát được đồng bộ hóa\n - Cá nhân hóa dữ liệu\n - v.v… \n\nEchoBox luôn miễn phí và không có quảng cáo\n\nXây dựng với ❤️ bởi Alzimer Ahmed</string>
     <string name="issue_tracker">Theo dõi lỗi</string>
     <string name="featured_playlists">Danh sách phát nổi bật</string>
     <string name="featured_inArtist">Nổi bật</string>
@@ -451,7 +449,7 @@
     <string name="later">Để sau</string>
     <string name="give_a_star">Tặng một sao</string>
     <string name="enjoying_echobox">Yêu thích EchoBox</string>
-    <string name="if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on">Nếu bạn yêu thích EchoBox, sao EchoBox trên GitHub hoặc để lại một đánh giá trên</string>
+    <string name="if_you_enjoy_using_echobox_star_echobox_on_github">Nếu bạn yêu thích EchoBox, sao EchoBox trên GitHub hoặc để lại một đánh giá trên</string>
     <string name="if_you_love_my_work_consider">"Nếu bạn cảm thấy yêu thích những gì tôi làm, có thể "</string>
     <string name="buying_me_a_coffee">mua cho tôi một ly cà phê.</string>
     <string name="fade_audio_effect">Hiệu ứng làm mờ âm thanh</string>
@@ -622,8 +620,6 @@
     <string name="quit_app">Thoát ứng dụng</string>
     <string name="local_tracking_title">Theo dõi lịch sử nghe cục bộ</string>
     <string name="local_tracking_description">Ghi lại lịch sử nghe nhạc vào cơ sở dữ liệu cục bộ</string>
-    <string name="blog_notification_title">Thông báo về các bài blog mới</string>
-    <string name="blog_notification_description">Nhận thông báo khi có bài blog mới được phát hành</string>
     <string name="echobox_charts">EchoBox Charts</string>
     <string name="crossfading">Đang chuyển bài mượt mà</string>
     <string name="your_320kbps_url">Đường dẫn link 320kbps của bạn</string>

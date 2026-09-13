@@ -37,7 +37,6 @@ import com.alzimer.echobox.domain.mediaservice.handler.ToastType
 import com.alzimer.echobox.logger.Logger
 import com.alzimer.echobox.media3.di.setServiceActivitySession
 import com.alzimer.echobox.di.viewModelModule
-import com.alzimer.echobox.service.rss.RssFeedNotifyWork
 import com.alzimer.echobox.service.test.notification.NotifyWork
 import com.alzimer.echobox.utils.ComposeResUtils
 import com.alzimer.echobox.utils.VersionManager
@@ -204,30 +203,6 @@ class MainActivity : AppCompatActivity() {
             ExistingPeriodicWorkPolicy.KEEP,
             request,
         )
-        lifecycleScope.launch {
-            dataStoreManager.blogNotificationEnabled.collect { enabled ->
-                if (enabled == DataStoreManager.TRUE) {
-                    val rssRequest =
-                        PeriodicWorkRequestBuilder<RssFeedNotifyWork>(
-                            24L,
-                            TimeUnit.HOURS,
-                        ).addTag("Blog RSS Worker")
-                            .setConstraints(
-                                Constraints
-                                    .Builder()
-                                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                                    .build(),
-                            ).build()
-                    WorkManager.getInstance(this@MainActivity).enqueueUniquePeriodicWork(
-                        "Blog RSS Worker",
-                        ExistingPeriodicWorkPolicy.KEEP,
-                        rssRequest,
-                    )
-                } else {
-                    WorkManager.getInstance(this@MainActivity).cancelUniqueWork("Blog RSS Worker")
-                }
-            }
-        }
 
         if (!EasyPermissions.hasPermissions(this, Manifest.permission.POST_NOTIFICATIONS)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

@@ -70,18 +70,18 @@ fun ReviewDialog(
         text = {
             Text(
                 buildAnnotatedString {
-                    append(stringResource(Res.string.if_you_enjoy_using_echobox_star_echobox_on_github_or_leave_a_review_on))
+                    append(stringResource(Res.string.if_you_enjoy_using_echobox_star_echobox_on_github))
                     withLink(
                         LinkAnnotation.Url(
-                            "https://www.producthunt.com/products/echobox",
+                            "https://github.com/alzimerahmed/EchoBox",
                             TextLinkStyles(style = SpanStyle(textDecoration = TextDecoration.Underline, color = seed)),
                         ) {
                             onDoneReview.invoke()
                             onDismissRequest.invoke()
-                            uriHandler.openUri("https://www.producthunt.com/products/echobox")
+                            uriHandler.openUri("https://github.com/alzimerahmed/EchoBox")
                         },
                     ) {
-                        append(" ProductHunt")
+                        append(" GitHub")
                     }
                     append("\n")
                     append(stringResource(Res.string.if_you_love_my_work_consider))
