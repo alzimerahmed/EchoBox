@@ -13,6 +13,7 @@ import com.alzimer.echobox.domain.utils.Resource
 import com.alzimer.echobox.kotlinytmusicscraper.YouTube
 import com.alzimer.echobox.kotlinytmusicscraper.models.AlbumItem
 import com.alzimer.echobox.logger.Logger
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -103,15 +104,20 @@ internal class AlbumRepositoryImpl(
 
     override fun getAlbumData(browseId: String): Flow<Resource<AlbumBrowse>> =
         flow {
-            runCatching {
+            try {
                 youTube
                     .album(browseId, withSongs = true)
                     .onSuccess { result ->
                         emit(Resource.Success(parseAlbumData(result)))
                     }.onFailure { e ->
-                        Logger.d(TAG, "getAlbumData -> error: ${e.message}")
-                        emit(Resource.Error(e.message.toString()))
+                        Logger.d(TAG, "getAlbumData -> error: ${e.message ?: "unknown error"}")
+                        emit(Resource.Error(e.message ?: "Unknown error while loading album"))
                     }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Logger.e(TAG, "getAlbumData -> error: ${e.message ?: "unknown error"}", e)
+                emit(Resource.Error(e.message ?: "Unknown error while loading album"))
             }
         }.flowOn(Dispatchers.IO)
 
@@ -120,7 +126,7 @@ internal class AlbumRepositoryImpl(
         params: String,
     ): Flow<Pair<String, List<AlbumsResult>>?> =
         flow {
-            runCatching {
+            try {
                 youTube
                     .browse(browseId = browseId, params = params)
                     .onSuccess { data ->
@@ -137,9 +143,14 @@ internal class AlbumRepositoryImpl(
                             ),
                         )
                     }.onFailure {
-                        it.printStackTrace()
+                        Logger.d(TAG, "getAlbumMore -> error: ${it.message ?: "unknown error"}")
                         emit(null)
                     }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Logger.e(TAG, "getAlbumMore -> error: ${e.message ?: "unknown error"}", e)
+                emit(null)
             }
         }.flowOn(Dispatchers.IO)
 }
