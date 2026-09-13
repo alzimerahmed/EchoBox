@@ -2706,7 +2706,7 @@ fun SettingScreen(
                     title = stringResource(Res.string.author),
                     subtitle = stringResource(Res.string.alzimer_dev),
                     onClick = {
-                        uriHandler.openUri("https://github.com/alzimerahmed84/EchoBox")
+                        uriHandler.openUri("https://github.com/alzimerahmed/EchoBox")
                     },
                 )
                 SettingItem(

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20iOS-blue?logo=android)](https://github.com/alzimerahmed84/EchoBox/releases)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20iOS-blue?logo=android)](https://github.com/alzimerahmed/EchoBox/releases)
 [![Language](https://img.shields.io/badge/language-Kotlin-7F52FF?logo=kotlin)](https://kotlinlang.org)
 [![UI](https://img.shields.io/badge/UI-Jetpack%20Compose%20%26%20Compose%20Multiplatform-4285F4?logo=jetpackcompose)](https://www.jetbrains.com/lifecycle/compose/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-green)](LICENSE)
@@ -99,7 +99,7 @@ Fork the repo, create a feature branch, and open a pull request. Keep commits fo
 
 ## Changelog
 
-See [GitHub Releases](https://github.com/alzimerahmed84/EchoBox/releases).
+See [GitHub Releases](https://github.com/alzimerahmed/EchoBox/releases).
 
 ## License
 

@@ -35,7 +35,7 @@ class DiscordRPC(
             buttons =
                 listOf(
                     "Listen on EchoBox" to "https://simpmusic.org/app/watch?v=${song.videoId}",
-                    "Visit EchoBox" to "https://github.com/maxrave-dev/EchoBox",
+                    "Visit EchoBox" to "https://github.com/alzimerahmed/EchoBox",
                 ),
             type = Type.LISTENING,
             since = currentTime,

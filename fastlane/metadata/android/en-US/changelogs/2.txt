@@ -1,6 +1,6 @@
 Fixes:
 
-- Fixed alzimerahmed84/EchoBox#4
+- Fixed alzimerahmed/EchoBox#4
 - Fixed bugs
 - Migrate Gradle to Kotlin KTS
 
@@ -8,9 +8,9 @@ New Feature:
 
 - Remove Thumbnail Cache
 - Move or remove Queue Track
-- Backup and restore data (alzimerahmed84/EchoBox#2)
+- Backup and restore data (alzimerahmed/EchoBox#2)
 - Add swipe to remove miniplayer
-- Add EchoBox to YouTube, YouTube Music's share menu (alzimerahmed84/EchoBox#9)
+- Add EchoBox to YouTube, YouTube Music's share menu (alzimerahmed/EchoBox#9)
 - Open YouTube link by default
 - Add static shortcuts
 - Auto save lyrics for offline playback

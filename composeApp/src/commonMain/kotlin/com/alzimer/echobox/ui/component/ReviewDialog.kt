@@ -40,7 +40,7 @@ fun ReviewDialog(
         confirmButton = {
             TextButton(onClick = {
                 onDoneReview.invoke()
-                uriHandler.openUri("https://github.com/alzimerahmed84/EchoBox")
+                uriHandler.openUri("https://github.com/alzimerahmed/EchoBox")
             }) {
                 Text(
                     stringResource(Res.string.give_a_star),
@@ -87,12 +87,12 @@ fun ReviewDialog(
                     append(stringResource(Res.string.if_you_love_my_work_consider))
                     withLink(
                         LinkAnnotation.Url(
-                            "https://github.com/alzimerahmed84/EchoBox",
+                            "https://github.com/alzimerahmed/EchoBox",
                             TextLinkStyles(style = SpanStyle(textDecoration = TextDecoration.Underline, color = seed)),
                         ) {
                             onDoneReview.invoke()
                             onDismissRequest.invoke()
-                            uriHandler.openUri("https://github.com/alzimerahmed84/EchoBox")
+                            uriHandler.openUri("https://github.com/alzimerahmed/EchoBox")
                         },
                     ) {
                         append(stringResource(Res.string.buying_me_a_coffee))

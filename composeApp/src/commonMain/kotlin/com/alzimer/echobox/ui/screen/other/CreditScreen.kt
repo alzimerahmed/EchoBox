@@ -105,7 +105,7 @@ fun CreditScreen(
             textDecoration = TextDecoration.Underline,
             modifier =
                 Modifier.clickable {
-                    openUrl("https://github.com/alzimerahmed84/EchoBox")
+                    openUrl("https://github.com/alzimerahmed/EchoBox")
                 },
         )
 
@@ -142,7 +142,7 @@ fun CreditScreen(
             // Developer blog button
             TextButton(
                 onClick = {
-                    openUrl("https://github.com/alzimerahmed84/EchoBox")
+                    openUrl("https://github.com/alzimerahmed/EchoBox")
                 },
                 modifier =
                     Modifier
@@ -162,7 +162,7 @@ fun CreditScreen(
             // GitHub button
             TextButton(
                 onClick = {
-                    openUrl("https://github.com/alzimerahmed84/EchoBox")
+                    openUrl("https://github.com/alzimerahmed/EchoBox")
                 },
                 modifier =
                     Modifier
@@ -176,7 +176,7 @@ fun CreditScreen(
             // Issue tracker button
             TextButton(
                 onClick = {
-                    openUrl("https://github.com/alzimerahmed84/EchoBox/issues")
+                    openUrl("https://github.com/alzimerahmed/EchoBox/issues")
                 },
                 modifier =
                     Modifier
@@ -190,7 +190,7 @@ fun CreditScreen(
             // Buy me a coffee button
             TextButton(
                 onClick = {
-                    openUrl("https://github.com/alzimerahmed84/EchoBox")
+                    openUrl("https://github.com/alzimerahmed/EchoBox")
                 },
                 modifier =
                     Modifier
