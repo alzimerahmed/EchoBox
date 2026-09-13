@@ -131,6 +131,10 @@ class LibraryViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val localTrackingEnabled = dataStoreManager.localTrackingEnabled.mapLatest { it == DataStoreManager.TRUE }
 
+    /** The Local files chip only exists once the feature is switched on in Settings. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val localFilesEnabled = dataStoreManager.localFilesEnabled.mapLatest { it == DataStoreManager.TRUE }
+
     init {
         viewModelScope.launch {
             val currentScreenJob =

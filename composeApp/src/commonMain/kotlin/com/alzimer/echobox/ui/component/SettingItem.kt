@@ -43,8 +43,10 @@ fun SettingItem(
     Box(
         Modifier
             .then(
-                if (onClick != null && isEnable) {
-                    Modifier.clickable { onClick.invoke() }
+                if (onClick != null) {
+                    // enabled=false still marks the row Disabled in the semantics tree; a
+                    // dead clickable reads as plain text to TalkBack.
+                    Modifier.clickable(enabled = isEnable) { onClick.invoke() }
                 } else {
                     Modifier
                 },

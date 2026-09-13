@@ -63,7 +63,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.inject
 import org.koin.mp.KoinPlatform.getKoin
-import org.simpmusic.lastfm.configLastfm
+import com.alzimer.echobox.lastfm.configLastfm
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.app_name
 import echobox.composeapp.generated.resources.circle_app_icon

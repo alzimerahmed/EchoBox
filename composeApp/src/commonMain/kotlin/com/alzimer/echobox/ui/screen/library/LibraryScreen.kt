@@ -104,6 +104,7 @@ import echobox.composeapp.generated.resources.downloaded_playlists
 import echobox.composeapp.generated.resources.favorite_playlists
 import echobox.composeapp.generated.resources.favorite_podcasts
 import echobox.composeapp.generated.resources.library
+import echobox.composeapp.generated.resources.local_files
 import echobox.composeapp.generated.resources.mix_for_you
 import echobox.composeapp.generated.resources.no_YouTube_playlists
 import echobox.composeapp.generated.resources.no_charts_found
@@ -133,6 +134,7 @@ fun LibraryScreen(
     // Wrapped and its recaps are built entirely from playback_event, so the chip follows the same
     // setting the Analytics tab does.
     val localTrackingEnabled by viewModel.localTrackingEnabled.collectAsStateWithLifecycle(initialValue = false)
+    val localFilesEnabled by viewModel.localFilesEnabled.collectAsStateWithLifecycle(initialValue = false)
     val monthlyRecaps by viewModel.monthlyRecaps.collectAsStateWithLifecycle()
     val nowPlaying by viewModel.nowPlayingVideoId.collectAsStateWithLifecycle()
     val youTubePlaylist by viewModel.youTubePlaylist.collectAsStateWithLifecycle()
@@ -167,7 +169,7 @@ fun LibraryScreen(
     val chipRowState = rememberScrollState()
     val currentFilter by viewModel.currentScreen.collectAsStateWithLifecycle()
 
-    LaunchedEffect(currentFilter) {
+    LaunchedEffect(currentFilter, localFilesEnabled) {
         when (currentFilter) {
             LibraryChipType.YOUTUBE_MUSIC_PLAYLIST -> {
                 if (youTubePlaylist.data.isNullOrEmpty()) {
@@ -189,6 +191,16 @@ fun LibraryScreen(
 
             LibraryChipType.LOCAL_PLAYLIST -> {
                 viewModel.getLocalPlaylist()
+            }
+
+            // The list is a reactive Room flow — nothing to fetch; the tab itself rescans when
+            // it comes up granted-but-empty. If the feature was switched off while this chip was
+            // selected, the chip is hidden but the filter still points here — bounce it like
+            // YOUTUBE_MIX_FOR_YOU so the user doesn't sit on a chip-less tab.
+            LibraryChipType.LOCAL_FILES -> {
+                if (!localFilesEnabled) {
+                    viewModel.setCurrentScreen(LibraryChipType.YOUR_LIBRARY)
+                }
             }
 
             LibraryChipType.FAVORITE_PLAYLIST -> {
@@ -308,6 +320,15 @@ fun LibraryScreen(
                 ) {
                     viewModel.getLocalPlaylist()
                 }
+            }
+
+            LibraryChipType.LOCAL_FILES -> {
+                LocalFilesTab(
+                    contentPadding = innerPadding.copy(top = topAppBarHeight),
+                    navController = navController,
+                    selectionState = selectionState,
+                    onScrolling = onScrolling,
+                )
             }
 
             LibraryChipType.FAVORITE_PLAYLIST -> {
@@ -542,6 +563,9 @@ fun LibraryScreen(
                 if (type == LibraryChipType.WRAPPED && !localTrackingEnabled) {
                     return@forEach
                 }
+                if (type == LibraryChipType.LOCAL_FILES && !localFilesEnabled) {
+                    return@forEach
+                }
                 Chip(
                     isAnimated = false,
                     isSelected = type == currentFilter,
@@ -551,6 +575,7 @@ fun LibraryScreen(
                             LibraryChipType.YOUTUBE_MUSIC_PLAYLIST -> stringResource(Res.string.your_youtube_playlists)
                             LibraryChipType.YOUTUBE_MIX_FOR_YOU -> stringResource(Res.string.mix_for_you)
                             LibraryChipType.LOCAL_PLAYLIST -> stringResource(Res.string.your_playlists)
+                            LibraryChipType.LOCAL_FILES -> stringResource(Res.string.local_files)
                             LibraryChipType.FAVORITE_PLAYLIST -> stringResource(Res.string.favorite_playlists)
                             LibraryChipType.DOWNLOADED_PLAYLIST -> stringResource(Res.string.downloaded_playlists)
                             LibraryChipType.FAVORITE_PODCAST -> stringResource(Res.string.favorite_podcasts)
@@ -576,10 +601,15 @@ fun LibraryScreen(
                     selectionState.exit()
                 },
                 onAddToPlaylist = { showSelectionAddToPlaylist = true },
-                onDownload = {
-                    selectionViewModel.download(selectedIds)
-                    selectionState.exit()
-                },
+                onDownload =
+                    if (currentFilter == LibraryChipType.LOCAL_FILES) {
+                        null
+                    } else {
+                        {
+                            selectionViewModel.download(selectedIds)
+                            selectionState.exit()
+                        }
+                    },
                 onAddToFavorite = {
                     selectionViewModel.addToFavorite(selectedIds)
                     selectionState.exit()

@@ -132,8 +132,8 @@
 -keep class com.alzimer.echobox.kotlinytmusicscraper.pages.** { *; }
 -keep class com.alzimer.echobox.kotlinytmusicscraper.utils.** { *; }
 
--keep class org.simpmusic.lyrics.parser.** { *; }
--keep class org.simpmusic.lyrics.models.** { *; }
+-keep class com.alzimer.echobox.lyrics.parser.** { *; }
+-keep class com.alzimer.echobox.lyrics.models.** { *; }
 -keep class com.echobox.lyrics.parser.** { *; }
 
 -dontwarn com.alzimer.echobox.kotlinytmusicscraper.YouTube$SearchFilter$Companion
@@ -159,12 +159,12 @@
 -dontwarn com.alzimer.echobox.spotify.model.response.spotify.search.SpotifySearchResponse$Data$Search
 -dontwarn com.alzimer.echobox.spotify.model.response.spotify.search.SpotifySearchResponse$Data
 -dontwarn com.alzimer.echobox.spotify.model.response.spotify.search.SpotifySearchResponse
--dontwarn org.simpmusic.aiservice.AIHost
--dontwarn org.simpmusic.aiservice.AiClient
--dontwarn org.simpmusic.lyrics.EchoBoxLyricsClient
--dontwarn org.simpmusic.lyrics.domain.Lyrics$LyricsX$Line
--dontwarn org.simpmusic.lyrics.domain.Lyrics$LyricsX
--dontwarn org.simpmusic.lyrics.domain.Lyrics
+-dontwarn com.alzimer.echobox.aiservice.AIHost
+-dontwarn com.alzimer.echobox.aiservice.AiClient
+-dontwarn com.alzimer.echobox.lyrics.EchoBoxLyricsClient
+-dontwarn com.alzimer.echobox.lyrics.domain.Lyrics$LyricsX$Line
+-dontwarn com.alzimer.echobox.lyrics.domain.Lyrics$LyricsX
+-dontwarn com.alzimer.echobox.lyrics.domain.Lyrics
 
 -keep class org.apache.commons.io.** { *; }
 

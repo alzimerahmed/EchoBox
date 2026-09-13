@@ -35,8 +35,8 @@ import org.koin.core.component.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import org.simpmusic.crashlytics.configCrashlytics
-import org.simpmusic.lastfm.configLastfm
+import com.alzimer.echobox.crashlytics.configCrashlytics
+import com.alzimer.echobox.lastfm.configLastfm
 import java.lang.reflect.Field
 
 class EchoBoxApplication :

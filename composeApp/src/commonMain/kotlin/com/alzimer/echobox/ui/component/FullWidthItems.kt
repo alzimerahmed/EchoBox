@@ -46,6 +46,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
@@ -174,7 +176,10 @@ fun SongFullWidthItems(
                     .offset { IntOffset(offsetX.value.roundToInt(), 0) }
                     .background(
                         if (isSelected) seed.copy(alpha = 0.18f) else Color.Transparent,
-                    ).combinedClickable(
+                    ).semantics {
+                        // Only in selection mode — a "not selected" on every normal row is noise.
+                        if (selectionMode) selected = isSelected
+                    }.combinedClickable(
                         onClick = {
                             if (selectionMode) {
                                 onSelectToggle?.invoke(itemVideoId)

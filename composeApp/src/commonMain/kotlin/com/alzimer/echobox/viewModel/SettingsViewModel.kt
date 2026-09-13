@@ -21,6 +21,7 @@ import com.alzimer.echobox.domain.repository.AccountRepository
 import com.alzimer.echobox.domain.repository.ArtistRepository
 import com.alzimer.echobox.domain.repository.CacheRepository
 import com.alzimer.echobox.domain.repository.CommonRepository
+import com.alzimer.echobox.domain.repository.LocalMediaRepository
 import com.alzimer.echobox.domain.repository.LyricsRomanizerRepository
 import com.alzimer.echobox.domain.repository.SongRepository
 import com.alzimer.echobox.domain.utils.LocalResource
@@ -45,7 +46,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.koin.core.component.inject
-import org.simpmusic.lastfm.isLastfmAvailable
+import com.alzimer.echobox.lastfm.isLastfmAvailable
 import org.jetbrains.compose.resources.getString as formatString
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.backup_create_failed
@@ -60,6 +61,8 @@ import echobox.composeapp.generated.resources.clear_player_cache
 import echobox.composeapp.generated.resources.clear_thumbnail_cache
 import echobox.composeapp.generated.resources.downloading_liked_songs
 import echobox.composeapp.generated.resources.error
+import echobox.composeapp.generated.resources.local_files_permission_denied
+import echobox.composeapp.generated.resources.local_files_scan_result
 import echobox.composeapp.generated.resources.log_out_confirm_message
 import echobox.composeapp.generated.resources.restore_failed
 import echobox.composeapp.generated.resources.restore_in_progress
@@ -76,6 +79,7 @@ class SettingsViewModel(
     private val cacheRepository: CacheRepository,
     private val artistRepository: ArtistRepository,
     private val lyricsRomanizerRepository: LyricsRomanizerRepository,
+    private val localMediaRepository: LocalMediaRepository,
 ) : BaseViewModel() {
     private val databasePath: String? = commonRepository.getDatabasePath()
     private val downloadUtils: DownloadHandler by inject()
@@ -228,6 +232,15 @@ class SettingsViewModel(
     private val _localTrackingEnabled = MutableStateFlow<Boolean>(false)
     val localTrackingEnabled: StateFlow<Boolean> = _localTrackingEnabled
 
+    private val _localFilesEnabled = MutableStateFlow<Boolean>(false)
+    val localFilesEnabled: StateFlow<Boolean> = _localFilesEnabled
+
+    private val _localFilesCount = MutableStateFlow(0)
+    val localFilesCount: StateFlow<Int> = _localFilesCount
+
+    private val _localFilesLastScan = MutableStateFlow(0L)
+    val localFilesLastScan: StateFlow<Long> = _localFilesLastScan
+
     private val _blogNotificationEnabled = MutableStateFlow(true)
     val blogNotificationEnabled: StateFlow<Boolean> = _blogNotificationEnabled
 
@@ -337,6 +350,9 @@ class SettingsViewModel(
         getLocalTrackingEnabled()
         getBlogNotificationEnabled()
         getAutoBackupEnabled()
+        getLocalFilesEnabled()
+        getLocalFilesLastScan()
+        observeLocalFiles()
         getAutoBackupFrequency()
         getAutoBackupMaxFiles()
         getAutoBackupLastTime()
@@ -361,6 +377,63 @@ class SettingsViewModel(
         viewModelScope.launch {
             dataStoreManager.setLocalTrackingEnabled(enabled)
             getLocalTrackingEnabled()
+        }
+    }
+
+    private fun getLocalFilesEnabled() {
+        viewModelScope.launch {
+            dataStoreManager.localFilesEnabled.collect { enabled ->
+                _localFilesEnabled.value = enabled == DataStoreManager.TRUE
+            }
+        }
+    }
+
+    private fun getLocalFilesLastScan() {
+        viewModelScope.launch {
+            dataStoreManager.localFilesLastScan.collect { epoch ->
+                _localFilesLastScan.value = epoch
+            }
+        }
+    }
+
+    private fun observeLocalFiles() {
+        viewModelScope.launch {
+            localMediaRepository.localSongs.collect { songs ->
+                _localFilesCount.value = songs.size
+            }
+        }
+    }
+
+    /**
+     * Only reachable through the permission requester — a denied grant never lands here.
+     * Disabling drops every indexed local row: the feature is off, so there is nothing to keep
+     * the index for.
+     */
+    fun enableLocalFiles() {
+        viewModelScope.launch {
+            dataStoreManager.setLocalFilesEnabled(true)
+            localMediaRepository.rescan()
+        }
+    }
+
+    fun disableLocalFiles() {
+        viewModelScope.launch {
+            dataStoreManager.setLocalFilesEnabled(false)
+            localMediaRepository.clearAll()
+        }
+    }
+
+    fun rescanLocalFiles() {
+        viewModelScope.launch {
+            val result = localMediaRepository.rescan()
+            makeToast(formatString(Res.string.local_files_scan_result, result.total))
+        }
+    }
+
+    /** Denied-permanently answers instantly with no dialog — say why the switch stayed off. */
+    fun toastLocalFilesDenied() {
+        viewModelScope.launch {
+            makeToast(formatString(Res.string.local_files_permission_denied))
         }
     }
 

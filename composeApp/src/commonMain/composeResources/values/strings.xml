@@ -698,6 +698,20 @@
     <string name="quit_app">Quit app</string>
     <string name="local_tracking_title">Local tracking listening history</string>
     <string name="local_tracking_description">Log your listening history to local database</string>
+    <string name="local_files">Local files</string>
+    <string name="local_files_enable_title">Local files</string>
+    <string name="local_files_enable_description">Index the music stored on this device into your library</string>
+    <string name="local_files_permission_hint">EchoBox needs access to audio files on this device to list your music</string>
+    <string name="local_files_empty">No music files found on this device</string>
+    <string name="local_files_never_scanned">Never scanned</string>
+    <string name="rescan">Rescan</string>
+    <string name="allow_access">Allow access</string>
+    <string name="local_files_permission_denied">Permission denied. Enable it in system settings to index local files.</string>
+    <string name="local_files_scan_result">Scan complete — %d files on device</string>
+    <plurals name="local_files_count">
+        <item quantity="one">%d local file</item>
+        <item quantity="other">%d local files</item>
+    </plurals>
     <string name="blog_notification_title">Blog post notifications</string>
     <string name="blog_notification_description">Get notified when a new blog post is published</string>
     <string name="echobox_charts">EchoBox Charts</string>

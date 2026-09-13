@@ -10,6 +10,7 @@ import com.alzimer.echobox.common.Config.SHARE
 import com.alzimer.echobox.common.Config.SONG_CLICK
 import com.alzimer.echobox.common.Config.VIDEO_CLICK
 import com.alzimer.echobox.common.SELECTED_LANGUAGE
+import com.alzimer.echobox.common.isLocalFileId
 import com.alzimer.echobox.common.STATUS_DONE
 import com.alzimer.echobox.domain.data.entities.AlbumEntity
 import com.alzimer.echobox.domain.data.entities.DownloadState
@@ -94,7 +95,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.getString
-import org.simpmusic.lastfm.completeLogin
+import com.alzimer.echobox.lastfm.completeLogin
 import echobox.composeapp.generated.resources.Res
 import echobox.composeapp.generated.resources.added_to_queue
 import echobox.composeapp.generated.resources.added_to_youtube_liked
@@ -1338,6 +1339,10 @@ class SharedViewModel(
                 }
             resetLyricsVoteState()
             val lyricsProvider = dataStoreManager.lyricsProvider.first()
+            // Id-keyed providers (EchoBox/YouTube captions) cannot look up a local_ id — the
+            // call is doomed before it leaves. Title-keyed ones (LRCLIB, BetterLyrics) still work.
+            val idKeyedProviders = setOf(DataStoreManager.SIMPMUSIC, DataStoreManager.YOUTUBE)
+            if (videoId.isLocalFileId() && lyricsProvider in idKeyedProviders) return@launch
             when (lyricsProvider) {
                 DataStoreManager.SIMPMUSIC -> {
                     getEchoBoxLyrics(

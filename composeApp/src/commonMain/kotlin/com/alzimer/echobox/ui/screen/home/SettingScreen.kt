@@ -110,6 +110,7 @@ import com.alzimer.echobox.domain.utils.LocalResource
 import com.alzimer.echobox.logger.Logger
 import com.alzimer.echobox.Platform
 import com.alzimer.echobox.expect.ui.fileSaverResult
+import com.alzimer.echobox.expect.ui.rememberLocalAudioPermission
 import com.alzimer.echobox.expect.ui.isLyricsBlurSupported
 import com.alzimer.echobox.expect.ui.isWallpaperDynamicColorSupported
 import com.alzimer.echobox.extension.bytesToMB
@@ -170,6 +171,7 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
@@ -289,6 +291,11 @@ import echobox.composeapp.generated.resources.last_checked_at
 import echobox.composeapp.generated.resources.lastfm_integration
 import echobox.composeapp.generated.resources.limit_player_cache
 import echobox.composeapp.generated.resources.listening_history
+import echobox.composeapp.generated.resources.local_files
+import echobox.composeapp.generated.resources.local_files_count
+import echobox.composeapp.generated.resources.local_files_enable_description
+import echobox.composeapp.generated.resources.local_files_enable_title
+import echobox.composeapp.generated.resources.local_files_never_scanned
 import echobox.composeapp.generated.resources.local_tracking_description
 import echobox.composeapp.generated.resources.local_tracking_title
 import echobox.composeapp.generated.resources.log_in_to_discord
@@ -362,6 +369,7 @@ import echobox.composeapp.generated.resources.quality
 import echobox.composeapp.generated.resources.radio_audio_only
 import echobox.composeapp.generated.resources.radio_audio_only_description
 import echobox.composeapp.generated.resources.requires_android_12
+import echobox.composeapp.generated.resources.rescan
 import echobox.composeapp.generated.resources.restore_your_data
 import echobox.composeapp.generated.resources.restore_your_saved_data
 import echobox.composeapp.generated.resources.rich_presence_info
@@ -505,6 +513,18 @@ fun SettingScreen(
     val videoDownloadQuality by viewModel.videoDownloadQuality.collectAsStateWithLifecycle()
     val keepYoutubePlaylistOffline by viewModel.keepYouTubePlaylistOffline.collectAsStateWithLifecycle()
     val localTrackingEnabled by viewModel.localTrackingEnabled.collectAsStateWithLifecycle(initialValue = false)
+    val localFilesEnabled by viewModel.localFilesEnabled.collectAsStateWithLifecycle()
+    val localFilesCount by viewModel.localFilesCount.collectAsStateWithLifecycle()
+    val localFilesLastScan by viewModel.localFilesLastScan.collectAsStateWithLifecycle()
+    val localAudioPermission =
+        rememberLocalAudioPermission { granted ->
+            if (granted) {
+                viewModel.enableLocalFiles()
+            } else {
+                // Permanent deny lands here with no dialog — say why the switch stayed off.
+                viewModel.toastLocalFilesDenied()
+            }
+        }
     val blogNotificationEnabled by viewModel.blogNotificationEnabled.collectAsStateWithLifecycle()
     val combineLocalAndYouTubeLiked by viewModel.combineLocalAndYouTubeLiked.collectAsStateWithLifecycle()
     val playVideo by remember { viewModel.playVideoInsteadOfAudio.map { it == TRUE } }.collectAsStateWithLifecycle(initialValue = false)
@@ -1532,6 +1552,46 @@ fun SettingScreen(
                                 dismiss = runBlocking { getString(Res.string.cancel) },
                             ),
                         )
+                    },
+                )
+            }
+        }
+        item(key = "local_files") {
+            Column {
+                Text(
+                    text = stringResource(Res.string.local_files),
+                    style = typo().labelMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                )
+                SettingItem(
+                    title = stringResource(Res.string.local_files_enable_title),
+                    subtitle = stringResource(Res.string.local_files_enable_description),
+                    switch =
+                        (localFilesEnabled to { enabled ->
+                            if (enabled) {
+                                localAudioPermission.requestIfNeeded()
+                            } else {
+                                viewModel.disableLocalFiles()
+                            }
+                        }),
+                )
+                SettingItem(
+                    title = stringResource(Res.string.rescan),
+                    subtitle =
+                        if (localFilesLastScan == 0L) {
+                            stringResource(Res.string.local_files_never_scanned)
+                        } else {
+                            "${pluralStringResource(Res.plurals.local_files_count, localFilesCount, localFilesCount)} • " +
+                                DateTimeFormatter
+                                    .ofPattern("yyyy-MM-dd HH:mm:ss")
+                                    .withZone(ZoneId.systemDefault())
+                                    .format(Instant.ofEpochMilli(localFilesLastScan))
+                        },
+                    smallSubtitle = true,
+                    isEnable = localFilesEnabled,
+                    onClick = {
+                        if (localFilesEnabled) viewModel.rescanLocalFiles()
                     },
                 )
             }

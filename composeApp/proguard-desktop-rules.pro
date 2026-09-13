@@ -312,8 +312,8 @@
 
 -keep class com.alzimer.echobox.kotlinytmusicscraper.** { *; }
 
--keep class org.simpmusic.lyrics.parser.** { *; }
--keep class org.simpmusic.lyrics.models.** { *; }
+-keep class com.alzimer.echobox.lyrics.parser.** { *; }
+-keep class com.alzimer.echobox.lyrics.models.** { *; }
 -keep class org.simpmusic.nowplayingcenter.** { *; }
 -keep class io.github.selemba1000.** { *; }
 -keep class com.echobox.lyrics.parser.** { *; }

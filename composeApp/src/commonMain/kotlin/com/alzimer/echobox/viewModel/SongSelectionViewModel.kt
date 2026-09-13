@@ -1,6 +1,7 @@
 package com.alzimer.echobox.viewModel
 
 import androidx.lifecycle.viewModelScope
+import com.alzimer.echobox.common.isLocalFileId
 import com.alzimer.echobox.domain.data.entities.DownloadState
 import com.alzimer.echobox.domain.data.entities.LocalPlaylistEntity
 import com.alzimer.echobox.domain.data.entities.SongEntity
@@ -86,7 +87,8 @@ class SongSelectionViewModel(
         viewModelScope.launch {
             val pending =
                 songsOf(videoIds).filter {
-                    it.downloadState == DownloadState.STATE_NOT_DOWNLOADED
+                    // Local files are already on disk — there is nothing to download.
+                    it.downloadState == DownloadState.STATE_NOT_DOWNLOADED && !it.videoId.isLocalFileId()
                 }
             if (pending.isEmpty()) return@launch
             pending.forEach { song ->

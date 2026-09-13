@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.simpmusic.lastfm.authorizeUrl
-import org.simpmusic.lastfm.completeLogin
+import com.alzimer.echobox.lastfm.authorizeUrl
+import com.alzimer.echobox.lastfm.completeLogin
 
 class LogInViewModel(
     private val dataStoreManager: DataStoreManager,

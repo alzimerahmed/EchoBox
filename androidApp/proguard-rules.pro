@@ -210,8 +210,8 @@
 
 -keep class com.alzimer.echobox.kotlinytmusicscraper.** { *; }
 
--keep class org.simpmusic.lyrics.parser.** { *; }
--keep class org.simpmusic.lyrics.models.** { *; }
+-keep class com.alzimer.echobox.lyrics.parser.** { *; }
+-keep class com.alzimer.echobox.lyrics.models.** { *; }
 -keep class com.echobox.lyrics.parser.** { *; }
 
 -keep class com.google.re2j.** { *; }

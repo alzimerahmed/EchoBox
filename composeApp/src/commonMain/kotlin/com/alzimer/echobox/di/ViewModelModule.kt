@@ -10,6 +10,7 @@ import com.alzimer.echobox.viewModel.HomeViewModel
 import com.alzimer.echobox.viewModel.ImportViewModel
 import com.alzimer.echobox.viewModel.LibraryDynamicPlaylistViewModel
 import com.alzimer.echobox.viewModel.LibraryViewModel
+import com.alzimer.echobox.viewModel.LocalFilesViewModel
 import com.alzimer.echobox.viewModel.LocalPlaylistViewModel
 import com.alzimer.echobox.viewModel.LogInViewModel
 import com.alzimer.echobox.viewModel.MoodViewModel
@@ -115,6 +116,7 @@ val viewModelModule =
                 get(),
                 get(),
                 get(),
+                get(),
             )
         }
         viewModel {
@@ -155,6 +157,11 @@ val viewModelModule =
             LocalPlaylistViewModel(
                 get(),
                 get(),
+                get(),
+            )
+        }
+        viewModel {
+            LocalFilesViewModel(
                 get(),
             )
         }

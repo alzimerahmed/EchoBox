@@ -342,6 +342,55 @@ interface DatabaseDao {
         artistId: List<String>?,
     )
 
+    /**
+     * On-device audio files live in `song` under a `local_` videoId so likes, playlists and play
+     * counts work unchanged. The prefix match uses GLOB, not LIKE: GLOB is case-sensitive (a
+     * hypothetical `LOCAL_` YouTube id can't collide) and SQLite can serve it as a range scan on
+     * the videoId primary-key index, where a case-insensitive LIKE always full-scans.
+     */
+    @Query("SELECT * FROM song WHERE videoId GLOB 'local_*' ORDER BY inLibrary DESC")
+    fun getLocalFileSongs(): Flow<List<SongEntity>>
+
+    @Query("SELECT videoId FROM song WHERE videoId GLOB 'local_*'")
+    suspend fun getLocalFileSongIds(): List<String>
+
+    /**
+     * Prune scanned-out local files. Unlike [deleteSongsByIds] there are deliberately no orphan
+     * conditions: a deleted file is gone regardless of likes or playlist membership — membership
+     * cascades handle the dangling references.
+     */
+    @Query("DELETE FROM song WHERE videoId IN (:videoIds) AND videoId GLOB 'local_*'")
+    suspend fun deleteLocalFileSongsByIds(videoIds: List<String>): Int
+
+    /**
+     * MediaStore re-keys `_ID` when it rebuilds its index, which changes every `local_` videoId at
+     * once. Rather than delete-and-reinsert — which would drop likes, play time and playlist
+     * membership — a scan that recognizes the same file under a new id re-keys the row. The pair
+     * table follows so memberships survive; `queue.listTrack` / `local_playlist.tracks` are JSON
+     * blobs and keep the old id until the next write (a dangling entry just fails to resolve).
+     *
+     * These three statements must run under `PRAGMA defer_foreign_keys` (see LocalDataSource's
+     * wrapper): `song.videoId` is the FK parent of `pair_song_local_playlist.songId`, so without
+     * deferred checks the parent update commits a child pointing at a gone key — or vice versa.
+     */
+    @Query("UPDATE song SET videoId = :newId WHERE videoId = :oldId AND :oldId GLOB 'local_*' AND :newId GLOB 'local_*'")
+    suspend fun rekeySongId(
+        oldId: String,
+        newId: String,
+    )
+
+    @Query("UPDATE pair_song_local_playlist SET songId = :newId WHERE songId = :oldId")
+    suspend fun rekeyPairSongIds(
+        oldId: String,
+        newId: String,
+    )
+
+    @Query("UPDATE playback_event SET videoId = :newId WHERE videoId = :oldId")
+    suspend fun rekeyPlaybackEventIds(
+        oldId: String,
+        newId: String,
+    )
+
     @Query("UPDATE song SET canvasUrl = :canvasUrl WHERE videoId = :videoId")
     suspend fun updateCanvasUrl(
         videoId: String,
@@ -1196,6 +1245,9 @@ interface DatabaseDao {
     @Query(
         "SELECT videoId FROM song WHERE " +
             "liked = 0 AND downloadState = 0 AND " +
+            // Local files are only ever removed by the scanner when the file is gone; sweeping
+            // an unreferenced one would just have the next scan resurrect it.
+            "videoId NOT GLOB 'local_*' AND " +
             "videoId NOT IN (SELECT songId FROM pair_song_local_playlist) AND " +
             "videoId NOT IN (SELECT videoId FROM set_video_id) AND " +
             "videoId NOT IN (SELECT videoId FROM podcast_episode_table) AND " +
@@ -1224,6 +1276,7 @@ interface DatabaseDao {
     @Query(
         "DELETE FROM song WHERE videoId IN (:videoIds) AND " +
             "liked = 0 AND downloadState = 0 AND " +
+            "videoId NOT GLOB 'local_*' AND " +
             "videoId NOT IN (SELECT songId FROM pair_song_local_playlist) AND " +
             "videoId NOT IN (SELECT videoId FROM set_video_id) AND " +
             "videoId NOT IN (SELECT videoId FROM podcast_episode_table) AND " +

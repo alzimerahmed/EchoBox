@@ -112,6 +112,7 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.alzimer.echobox.common.isLocalFileId
 import com.alzimer.echobox.data.io.readLocalImageBytes
 import com.alzimer.echobox.domain.data.entities.DownloadState
 import com.alzimer.echobox.domain.data.entities.LocalPlaylistEntity
@@ -1772,33 +1773,36 @@ fun NowPlayingBottomSheet(
                             viewModel.onUIEvent(NowPlayingBottomSheetUIEvent.ToggleLike)
                         },
                     )
-                    ActionButton(
-                        icon =
-                            when (uiState.songUIState.downloadState) {
-                                DownloadState.STATE_NOT_DOWNLOADED -> SimpIcons.DownloadForOfflineOutlined
-                                DownloadState.STATE_DOWNLOADING -> SimpIcons.Downloading
-                                DownloadState.STATE_DOWNLOADED -> SimpIcons.DownloadForOffline
-                                DownloadState.STATE_PREPARING -> SimpIcons.Downloading
-                                else -> SimpIcons.DownloadForOfflineOutlined
-                            },
-                        // The old baseline_downloaded.xml carried #FF00A0CB baked in; the shared
-                        // symbol is neutral, so the "done" state has to say the colour out loud.
-                        iconColor =
-                            if (uiState.songUIState.downloadState == DownloadState.STATE_DOWNLOADED) {
-                                Color(0xFF00A0CB)
-                            } else {
-                                Color.Unspecified
-                            },
-                        text =
-                            when (uiState.songUIState.downloadState) {
-                                DownloadState.STATE_NOT_DOWNLOADED -> Res.string.download
-                                DownloadState.STATE_DOWNLOADING -> Res.string.downloading
-                                DownloadState.STATE_DOWNLOADED -> Res.string.downloaded
-                                DownloadState.STATE_PREPARING -> Res.string.downloading
-                                else -> Res.string.download
-                            },
-                    ) {
-                        viewModel.onUIEvent(NowPlayingBottomSheetUIEvent.Download)
+                    // Local files are already on disk; there is no download to manage.
+                    if (!uiState.songUIState.videoId.isLocalFileId()) {
+                        ActionButton(
+                            icon =
+                                when (uiState.songUIState.downloadState) {
+                                    DownloadState.STATE_NOT_DOWNLOADED -> SimpIcons.DownloadForOfflineOutlined
+                                    DownloadState.STATE_DOWNLOADING -> SimpIcons.Downloading
+                                    DownloadState.STATE_DOWNLOADED -> SimpIcons.DownloadForOffline
+                                    DownloadState.STATE_PREPARING -> SimpIcons.Downloading
+                                    else -> SimpIcons.DownloadForOfflineOutlined
+                                },
+                            // The old baseline_downloaded.xml carried #FF00A0CB baked in; the shared
+                            // symbol is neutral, so the "done" state has to say the colour out loud.
+                            iconColor =
+                                if (uiState.songUIState.downloadState == DownloadState.STATE_DOWNLOADED) {
+                                    Color(0xFF00A0CB)
+                                } else {
+                                    Color.Unspecified
+                                },
+                            text =
+                                when (uiState.songUIState.downloadState) {
+                                    DownloadState.STATE_NOT_DOWNLOADED -> Res.string.download
+                                    DownloadState.STATE_DOWNLOADING -> Res.string.downloading
+                                    DownloadState.STATE_DOWNLOADED -> Res.string.downloaded
+                                    DownloadState.STATE_PREPARING -> Res.string.downloading
+                                    else -> Res.string.download
+                                },
+                        ) {
+                            viewModel.onUIEvent(NowPlayingBottomSheetUIEvent.Download)
+                        }
                     }
                     ActionButton(
                         icon = SimpIcons.PlaylistAdd,
@@ -1853,17 +1857,20 @@ fun NowPlayingBottomSheet(
                             navController.navigate(AlbumDestination(browseId = id))
                         }
                     }
-                    ActionButton(
-                        icon = SimpIcons.Sensors,
-                        text = Res.string.start_radio,
-                    ) {
-                        viewModel.onUIEvent(
-                            NowPlayingBottomSheetUIEvent.StartRadio(
-                                videoId = uiState.songUIState.videoId,
-                                name = "\"${uiState.songUIState.title}\" ${runBlocking { getString(Res.string.radio) }}",
-                            ),
-                        )
-                        hideModalBottomSheet()
+                    // Local files have no YouTube radio to start.
+                    if (!uiState.songUIState.videoId.isLocalFileId()) {
+                        ActionButton(
+                            icon = SimpIcons.Sensors,
+                            text = Res.string.start_radio,
+                        ) {
+                            viewModel.onUIEvent(
+                                NowPlayingBottomSheetUIEvent.StartRadio(
+                                    videoId = uiState.songUIState.videoId,
+                                    name = "\"${uiState.songUIState.title}\" ${runBlocking { getString(Res.string.radio) }}",
+                                ),
+                            )
+                            hideModalBottomSheet()
+                        }
                     }
                     Crossfade(targetState = changeMainLyricsProviderEnable) {
                         if (it) {
@@ -1924,11 +1931,13 @@ fun NowPlayingBottomSheet(
                             }
                         }
                     }
-                    ActionButton(
-                        icon = SimpIcons.Share,
-                        text = Res.string.share,
-                    ) {
-                        viewModel.onUIEvent(NowPlayingBottomSheetUIEvent.Share)
+                    if (!uiState.songUIState.videoId.isLocalFileId()) {
+                        ActionButton(
+                            icon = SimpIcons.Share,
+                            text = Res.string.share,
+                        ) {
+                            viewModel.onUIEvent(NowPlayingBottomSheetUIEvent.Share)
+                        }
                     }
                     EndOfModalBottomSheet()
                 }

@@ -9,7 +9,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "org.simpmusic.listentogether"
+        namespace = "com.alzimer.echobox.listentogether"
         compileSdk = 37
         minSdk = 26
         withHostTest { }

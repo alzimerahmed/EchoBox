@@ -12,7 +12,7 @@ kotlin {
 }
 
 android {
-    namespace = "org.simpmusic.cast"
+    namespace = "com.alzimer.echobox.cast"
     compileSdk = 37
 
     defaultConfig {
