@@ -204,7 +204,11 @@ sentry {
             }
         authToken.set(token ?: "")
         includeProguardMapping.set(true)
-        autoUploadProguardMapping.set(true)
+        // Uploading needs a valid auth token; without one the release task fails outright.
+        autoUploadProguardMapping.set(!token.isNullOrBlank())
+        if (token.isNullOrBlank()) {
+            println("SENTRY_AUTH_TOKEN absent — proguard mapping upload disabled for this build")
+        }
     } else {
         includeProguardMapping.set(false)
         autoUploadProguardMapping.set(false)
