@@ -15,6 +15,7 @@ kotlin {
         namespace = "com.alzimer.echobox.domain"
         compileSdk = 37
         minSdk = 26
+        withHostTest { }
     }
     val xcfName = "domainKit"
 

@@ -29,6 +29,8 @@ room = "2.8.4"
 legacy-support-v4 = "1.0.0"
 coroutines-android = "1.11.0"
 coroutines-guava = "1.11.0"
+turbine = "1.2.1"
+robolectric = "4.16.1"
 navigation = "2.9.2"
 gson = "2.14.0"
 coil3 = "3.5.0"
@@ -146,6 +148,9 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines-android" }
 coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "coroutines-guava" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-android" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 easypermissions = { group = "pub.devrel", name = "easypermissions", version.ref = "easypermissions" }

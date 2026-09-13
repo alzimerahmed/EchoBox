@@ -1,5 +1,7 @@
 *.iml
 .gradle
+# Gradle build dirs (any module, incl. feature/*)
+build/
 /local.properties
 /.idea/caches
 /.idea/libraries

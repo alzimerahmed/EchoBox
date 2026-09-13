@@ -32,6 +32,7 @@ kotlin {
         namespace = "com.alzimer.echobox.data"
         compileSdk = 37
         minSdk = 26
+        withHostTest { }
     }
 
     room {
@@ -84,6 +85,17 @@ kotlin {
         commonTest {
             dependencies {
                 implementation(libs.kotlin.test)
+            }
+        }
+
+        val androidHostTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.coroutines.test)
+                implementation(libs.turbine)
+                implementation(libs.robolectric)
+                implementation(libs.androidx.junit)
+                implementation(libs.junit)
             }
         }
 
